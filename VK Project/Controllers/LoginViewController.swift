@@ -49,7 +49,7 @@ class LoginViewController: UIViewController {
             performSegue(withIdentifier: segueIdentifierToTabBar, sender: nil)
         } else {
             showAlert(message: "Логин или пароль введены неверно, повторите попытку!")
-            { _ in self.backView.backgroundColor = UIColor.white
+            { _ in self.backView.backgroundColor = UIColor.red
                 return
             }
     }
