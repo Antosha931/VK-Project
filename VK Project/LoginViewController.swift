@@ -17,35 +17,44 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    let segueIdentifierToTabBar = "reuseIdentifierToTabBar"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(keyboardDie))
         backView.addGestureRecognizer(gestureRecognizer)
+        
     }
     
     @objc func keyboardDie() {
         self.backView.endEditing(true)
     }
     
-    @objc func keyboardWasShown() {
-        backView.largeContentImageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 200, right: 0)
+    func showAlert(message: String, completion: @escaping (UIAlertAction) -> Void) {
+        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: completion)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
     }
     
-    @objc func keyboardHide() {
-        backView.largeContentImageInsets = UIEdgeInsets.zero
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     @IBAction func loginButton(_ sender: Any) {
-        
+        if let login = loginTextField.text,
+           let password = passwordTextField.text,
+           !login.isEmpty,
+           !password.isEmpty,
+           login == "1",
+           password == "1" {
+            backView.backgroundColor = UIColor.white
+            performSegue(withIdentifier: segueIdentifierToTabBar, sender: nil)
+        } else {
+            showAlert(message: "Логин или пароль введены неверно, повторите попытку!")
+            { _ in self.backView.backgroundColor = UIColor.white
+                return
+            }
     }
     
+}
+
 }
 

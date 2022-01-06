@@ -28,8 +28,8 @@
                                         </constraints>
                                         <imageReference key="image" image="person.3.fill" catalog="system" symbolScale="large"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VK Project" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWc-g3-ig4">
-                                        <rect key="frame" x="103" y="239.5" width="208.5" height="44.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VK Client" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWc-g3-ig4">
+                                        <rect key="frame" x="113" y="239.5" width="188" height="44.5"/>
                                         <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="35"/>
                                         <color key="textColor" systemColor="systemYellowColor"/>
                                         <nil key="highlightedColor"/>
@@ -124,11 +124,63 @@
                         <outlet property="passwordLabel" destination="GX4-NI-6o0" id="IFN-zq-ieD"/>
                         <outlet property="passwordTextField" destination="vZL-uk-AMR" id="4TN-r9-sOy"/>
                         <outlet property="titleImageView" destination="wWw-gN-5hc" id="Rg1-Li-W52"/>
+                        <segue destination="1df-W1-ZVC" kind="presentation" identifier="segueIdentifierToTabBar" modalPresentationStyle="fullScreen" id="jyc-IP-0tP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="61.607142857142854"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="lx1-Zl-WYC">
+            <objects>
+                <viewController id="w4u-mb-vmR" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KJF-H3-e2p">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="4C4-zI-hIo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="AqO-pI-KEd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OAG-Zm-wKy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1820" y="367"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="oRB-rs-KCL">
+            <objects>
+                <viewController id="VFM-ag-yA5" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5oQ-JG-R25">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="RsD-D9-lc9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="zq5-9G-GDf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AWa-nD-0ii" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1820" y="-239"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="wMo-pc-PhD">
+            <objects>
+                <tabBarController id="1df-W1-ZVC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="XBK-c3-BdJ"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="58d-WX-juF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="VFM-ag-yA5" kind="relationship" relationship="viewControllers" id="Gaa-Pk-Cbv"/>
+                        <segue destination="w4u-mb-vmR" kind="relationship" relationship="viewControllers" id="D3B-5n-6Qd"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LWb-5c-q1Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="931" y="63"/>
         </scene>
     </scenes>
     <resources>
