@@ -12,5 +12,5 @@ struct Group {
     
     var name: String
     var avatar: UIImage?
-    var avatarArray: [UIImage]?
+    var description: String?
 }
