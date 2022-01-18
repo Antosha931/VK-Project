@@ -7,8 +7,11 @@
 
 import UIKit
 
-class GroupTableViewController: UITableViewController {
-
+class UserGroupTableViewController: UITableViewController {
+    
+    
+    let reuseIdentifierUserGroupCell = "UserGroupCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
