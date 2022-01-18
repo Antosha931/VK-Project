@@ -13,6 +13,9 @@
 		2A431EA72783A357004688BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A431EA52783A357004688BC /* Main.storyboard */; };
 		2A431EA92783A376004688BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A431EA82783A376004688BC /* Assets.xcassets */; };
 		2A431EAC2783A376004688BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A431EAA2783A376004688BC /* LaunchScreen.storyboard */; };
+		2A431EBE27875440004688BC /* UserTabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A431EBD27875440004688BC /* UserTabBarControllerViewController.swift */; };
+		2A431EC1278754F7004688BC /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A431EC0278754F7004688BC /* FriendsTableViewController.swift */; };
+		2A431EC4278755C5004688BC /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A431EC3278755C5004688BC /* GroupTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		2A431EA82783A376004688BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A431EAB2783A376004688BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A431EAD2783A377004688BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A431EBD27875440004688BC /* UserTabBarControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTabBarControllerViewController.swift; sourceTree = "<group>"; };
+		2A431EC0278754F7004688BC /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		2A431EC3278755C5004688BC /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,26 @@
 		2A431E9E2783A356004688BC /* VK Project */ = {
 			isa = PBXGroup;
 			children = (
+				2A431EBC278753EE004688BC /* Controllers */,
+				2A431EA52783A357004688BC /* Main.storyboard */,
+				2A431EAA2783A376004688BC /* LaunchScreen.storyboard */,
+				2A431EA82783A376004688BC /* Assets.xcassets */,
+				2A431EAD2783A377004688BC /* Info.plist */,
 				2A431E9F2783A357004688BC /* AppDelegate.swift */,
 				2A431EA12783A357004688BC /* SceneDelegate.swift */,
-				2A431EA32783A357004688BC /* LoginViewController.swift */,
-				2A431EA52783A357004688BC /* Main.storyboard */,
-				2A431EA82783A376004688BC /* Assets.xcassets */,
-				2A431EAA2783A376004688BC /* LaunchScreen.storyboard */,
-				2A431EAD2783A377004688BC /* Info.plist */,
 			);
 			path = "VK Project";
+			sourceTree = "<group>";
+		};
+		2A431EBC278753EE004688BC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2A431EA32783A357004688BC /* LoginViewController.swift */,
+				2A431EBD27875440004688BC /* UserTabBarControllerViewController.swift */,
+				2A431EC0278754F7004688BC /* FriendsTableViewController.swift */,
+				2A431EC3278755C5004688BC /* GroupTableViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +155,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A431EA42783A357004688BC /* LoginViewController.swift in Sources */,
+				2A431EBE27875440004688BC /* UserTabBarControllerViewController.swift in Sources */,
+				2A431EC1278754F7004688BC /* FriendsTableViewController.swift in Sources */,
 				2A431EA02783A357004688BC /* AppDelegate.swift in Sources */,
 				2A431EA22783A357004688BC /* SceneDelegate.swift in Sources */,
+				2A431EC4278755C5004688BC /* GroupTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
