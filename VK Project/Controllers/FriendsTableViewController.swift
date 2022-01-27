@@ -17,15 +17,42 @@ class FriendsTableViewController: UITableViewController {
     let reuseIdentifierUserTableCell = "UserCell"
     let segueIdentifierToFotoController = "segueIdentifierToFotoController"
     
-    func configure(userArray: [User]) {
-        self.friendsArray = userArray
+    func sortingUserNames() -> [String] {
+        var lettersArray: [String] = []
+        
+        for user in friendsArray {
+            let letter = String(user.name.prefix(1))
+            if !lettersArray.contains(letter) {
+                lettersArray.append(letter)
+            }
+        }
+        return lettersArray
     }
+    
+    func filterByAlphabet(lettersArray: String) -> [User] {
+        var lettersOfName: [User] = []
+        
+        for item in friendsArray {
+            let nameLetter = String(item.name.prefix(1))
+            if nameLetter == lettersArray {
+                lettersOfName.append(item)
+            }
+        }
+        return lettersOfName
+    }
+    
+    func configure(userArray: [User]) {
+            self.friendsArray = userArray
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-         self.clearsSelectionOnViewWillAppear = false
-         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        self.clearsSelectionOnViewWillAppear = false
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         
         friendsTableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserTableCell)
     }
@@ -33,18 +60,19 @@ class FriendsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sortingUserNames().count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friendsArray.count
+        return filterByAlphabet(lettersArray: sortingUserNames()[section]).count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUserTableCell, for: indexPath)
                 as? UniversalCell else { return UITableViewCell() }
         
-        cell.configure(user: friendsArray[indexPath.row])
+        let arrayLetter = filterByAlphabet(lettersArray: sortingUserNames()[indexPath.section])
+        cell.configure(user: arrayLetter[indexPath.row])
         
         return cell
     }
@@ -68,6 +96,14 @@ class FriendsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sortingUserNames()[section].uppercased()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
 
     // MARK: - Navigation
