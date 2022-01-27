@@ -23,13 +23,45 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jAf-HA-onB">
                                 <rect key="frame" x="0.0" y="0.0" width="287" height="243"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZk-Ik-go1">
+                                <rect key="frame" x="15" y="178" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="04b-Y2-o3B"/>
+                                    <constraint firstAttribute="height" constant="50" id="yC1-WK-xzF"/>
+                                </constraints>
+                                <state key="normal">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                </state>
+                                <connections>
+                                    <action selector="likeButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Nq8-ez-cpI"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KmF-iP-5Nx">
+                                <rect key="frame" x="15" y="178" width="50" height="50"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8A-s4-W53">
+                                <rect key="frame" x="15" y="178" width="50" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="jAf-HA-onB" secondAttribute="bottom" id="6RK-RL-kKk"/>
                             <constraint firstItem="jAf-HA-onB" firstAttribute="top" secondItem="3cK-zC-FHY" secondAttribute="top" id="6ig-EJ-KtT"/>
+                            <constraint firstItem="k8A-s4-W53" firstAttribute="leading" secondItem="KmF-iP-5Nx" secondAttribute="leading" id="J3Q-vt-4vW"/>
+                            <constraint firstItem="uZk-Ik-go1" firstAttribute="leading" secondItem="3cK-zC-FHY" secondAttribute="leading" constant="15" id="N1g-4A-s69"/>
+                            <constraint firstItem="k8A-s4-W53" firstAttribute="bottom" secondItem="KmF-iP-5Nx" secondAttribute="bottom" id="VNg-E8-di4"/>
+                            <constraint firstItem="k8A-s4-W53" firstAttribute="trailing" secondItem="KmF-iP-5Nx" secondAttribute="trailing" id="bz5-5Y-pO6"/>
+                            <constraint firstItem="KmF-iP-5Nx" firstAttribute="top" secondItem="uZk-Ik-go1" secondAttribute="top" id="eMq-sm-f2M"/>
+                            <constraint firstItem="k8A-s4-W53" firstAttribute="top" secondItem="KmF-iP-5Nx" secondAttribute="top" id="h1o-QS-DGt"/>
+                            <constraint firstItem="KmF-iP-5Nx" firstAttribute="bottom" secondItem="uZk-Ik-go1" secondAttribute="bottom" id="ija-iZ-Dbc"/>
                             <constraint firstAttribute="trailing" secondItem="jAf-HA-onB" secondAttribute="trailing" id="nzF-DT-rTb"/>
+                            <constraint firstAttribute="bottom" secondItem="uZk-Ik-go1" secondAttribute="bottom" constant="15" id="pe5-dK-fEw"/>
+                            <constraint firstItem="KmF-iP-5Nx" firstAttribute="leading" secondItem="uZk-Ik-go1" secondAttribute="leading" id="rpN-he-u0Y"/>
                             <constraint firstItem="jAf-HA-onB" firstAttribute="leading" secondItem="3cK-zC-FHY" secondAttribute="leading" id="u5C-DT-DvK"/>
+                            <constraint firstItem="KmF-iP-5Nx" firstAttribute="trailing" secondItem="uZk-Ik-go1" secondAttribute="trailing" id="yEH-qD-c5b"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -44,9 +76,12 @@
             <size key="customSize" width="287" height="243"/>
             <connections>
                 <outlet property="backView" destination="3cK-zC-FHY" id="1rn-Kv-lDL"/>
+                <outlet property="likeButton" destination="uZk-Ik-go1" id="JJQ-TM-cRJ"/>
+                <outlet property="likeImage" destination="KmF-iP-5Nx" id="vql-jQ-p4Z"/>
+                <outlet property="numberLikeLabel" destination="k8A-s4-W53" id="Oip-bf-oai"/>
                 <outlet property="photoImageView" destination="jAf-HA-onB" id="51u-Fk-EJ1"/>
             </connections>
-            <point key="canvasLocation" x="169" y="89"/>
+            <point key="canvasLocation" x="168.84057971014494" y="88.727678571428569"/>
         </collectionViewCell>
     </objects>
     <resources>
