@@ -9,16 +9,22 @@ import UIKit
 
 class UserGroupTableViewController: UITableViewController {
     
-    let reuseIdentifierUserGroupCell = "UserGroupCell"
-    let segueIdentifierToGlobalGroupController = "segueIdentifierToGlobalGroupController"
+    private let groupSearchBar = UISearchBar()
+    
+    private let reuseIdentifierUserGroupCell = "UserGroupCell"
+    private let segueIdentifierToGlobalGroupController = "segueIdentifierToGlobalGroupController"
     
     var userGroup = [Group]()
+    
+    private var resultSearchGroup = [Group]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.clearsSelectionOnViewWillAppear = false
         self.tableView.delegate = self
+        
+        groupSearchBar.delegate = self
         
         self.tableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserGroupCell)
         
@@ -27,6 +33,7 @@ class UserGroupTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        resultSearchGroup = userGroup
         self.tableView.reloadData()
     }
     
@@ -55,14 +62,14 @@ class UserGroupTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userGroup.count
+        return resultSearchGroup.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUserGroupCell, for: indexPath)
                 as? UniversalCell else { return UITableViewCell() }
         
-        cell.configure(group: userGroup[indexPath.row])
+        cell.configure(group: resultSearchGroup[indexPath.row])
         
         return cell
     }
@@ -73,6 +80,7 @@ class UserGroupTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         userGroup.remove(at: indexPath.row)
+        resultSearchGroup.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
@@ -81,4 +89,35 @@ class UserGroupTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+}
+
+extension UserGroupTableViewController: UISearchBarDelegate {
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return groupSearchBar
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            resultSearchGroup = userGroup
+        } else {
+            resultSearchGroup = userGroup.filter({ item in
+                item.name.lowercased().contains(searchText.lowercased())
+            })
+        }
+        self.tableView.reloadData()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.tableView.endEditing(true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        resultSearchGroup = userGroup
+    }
+    
 }

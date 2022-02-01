@@ -148,6 +148,7 @@
                     <connections>
                         <segue destination="naN-ax-sIN" kind="relationship" relationship="viewControllers" id="8lt-jE-5VQ"/>
                         <segue destination="Gws-ys-q6A" kind="relationship" relationship="viewControllers" id="UZW-h9-wdg"/>
+                        <segue destination="Uwb-Eh-Uy3" kind="relationship" relationship="viewControllers" id="xQw-re-i0X"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LWb-5c-q1Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -260,6 +261,74 @@
             </objects>
             <point key="canvasLocation" x="2548" y="355"/>
         </scene>
+        <!--Новости-->
+        <scene sceneID="AOb-Pn-6yX">
+            <objects>
+                <navigationController id="Uwb-Eh-Uy3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Новости" image="newspaper" catalog="system" id="qKD-dc-HcF">
+                        <color key="badgeColor" systemColor="systemBlueColor"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="q71-Ai-2W1">
+                        <rect key="frame" x="0.0" y="44" width="428" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" systemColor="systemYellowColor"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="5d5-Je-uEj" kind="relationship" relationship="rootViewController" id="Td1-2d-Wf7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sUK-kl-9IJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1691" y="1041"/>
+        </scene>
+        <!--Новости-->
+        <scene sceneID="Im6-RR-Sax">
+            <objects>
+                <viewController id="5d5-Je-uEj" customClass="NewsViewController" customModule="VK_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xj9-20-vcG">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jCQ-3M-y1A">
+                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="eyh-Ih-4r9">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="estimatedItemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewsCell" id="MLr-6U-b2J">
+                                        <rect key="frame" x="8" y="8" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="St3-E7-URs">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="d50-xa-6K7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="d50-xa-6K7" firstAttribute="bottom" secondItem="jCQ-3M-y1A" secondAttribute="bottom" id="74A-3A-pyp"/>
+                            <constraint firstItem="jCQ-3M-y1A" firstAttribute="top" secondItem="d50-xa-6K7" secondAttribute="top" id="BBO-Yc-t2c"/>
+                            <constraint firstItem="jCQ-3M-y1A" firstAttribute="leading" secondItem="d50-xa-6K7" secondAttribute="leading" id="qeB-5N-Wu2"/>
+                            <constraint firstItem="d50-xa-6K7" firstAttribute="trailing" secondItem="jCQ-3M-y1A" secondAttribute="trailing" id="qeC-Aq-cUT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Новости" id="A5N-Nv-tXF"/>
+                    <connections>
+                        <outlet property="collectionView" destination="jCQ-3M-y1A" id="ISp-Aj-X5O"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vlZ-t2-7m7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2547" y="1041"/>
+        </scene>
         <!--Global Group Table View Controller-->
         <scene sceneID="gxb-aw-9tS">
             <objects>
@@ -334,6 +403,7 @@
     </scenes>
     <resources>
         <image name="books.vertical" catalog="system" width="128" height="103"/>
+        <image name="newspaper" catalog="system" width="128" height="108"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
