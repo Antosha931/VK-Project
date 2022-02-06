@@ -39,8 +39,9 @@ class FotoCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         clearCell()
     }
-    
+
     func configure(image: UIImage) {
+        savedObject = image
         photoImageView.image = image
     }
     

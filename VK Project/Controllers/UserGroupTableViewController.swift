@@ -22,7 +22,6 @@ class UserGroupTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.clearsSelectionOnViewWillAppear = false
-        self.tableView.delegate = self
         
         groupSearchBar.delegate = self
         

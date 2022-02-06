@@ -12,4 +12,5 @@ struct News {
     
     var newsText: String
     var newsImage: UIImage?
+    var numberOfViews: Int
 }

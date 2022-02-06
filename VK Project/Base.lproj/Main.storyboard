@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1df-W1-ZVC">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -163,10 +163,10 @@
             </objects>
             <point key="canvasLocation" x="140.18691588785046" y="61.555075593952488"/>
         </scene>
-        <!--User Tab Bar Controller View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="wMo-pc-PhD">
             <objects>
-                <tabBarController id="1df-W1-ZVC" customClass="UserTabBarControllerViewController" customModule="VK_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="1df-W1-ZVC" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="XBK-c3-BdJ"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="58d-WX-juF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -203,7 +203,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="lcY-xd-2hQ" kind="show" identifier="segueIdentifierToFotoController" id="fjE-DU-cAn"/>
+                                    <segue destination="lcY-xd-2hQ" kind="show" identifier="segueIdentifierToFotoController" id="uoK-dI-3VG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -243,6 +243,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionViewCellContentView>
+                                <connections>
+                                    <segue destination="qK4-oC-0fM" kind="show" identifier="segueIdentifierToGalleryPhoto" id="FV3-Mc-fVF"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -255,6 +258,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEX-Ny-aSt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3377" y="-311"/>
+        </scene>
+        <!--Gallery Photo View Controller-->
+        <scene sceneID="EEm-J3-nQg">
+            <objects>
+                <viewController id="qK4-oC-0fM" customClass="GalleryPhotoViewController" customModule="VK_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="twi-tk-h7k">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Wq-hW-nIy">
+                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MNn-Wh-7sV" customClass="GalleryPhotoCustomView" customModule="VK_Project" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="50" width="388" height="655"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="MNn-Wh-7sV" firstAttribute="leading" secondItem="3Wq-hW-nIy" secondAttribute="leading" constant="20" id="2hC-Eh-dem"/>
+                                    <constraint firstAttribute="bottom" secondItem="MNn-Wh-7sV" secondAttribute="bottom" constant="50" id="32i-tl-feI"/>
+                                    <constraint firstAttribute="trailing" secondItem="MNn-Wh-7sV" secondAttribute="trailing" constant="20" id="DgX-WI-t2X"/>
+                                    <constraint firstItem="MNn-Wh-7sV" firstAttribute="top" secondItem="3Wq-hW-nIy" secondAttribute="top" constant="50" id="FmV-3w-SRC"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ehz-GA-O5Y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3Wq-hW-nIy" firstAttribute="leading" secondItem="Ehz-GA-O5Y" secondAttribute="leading" id="FpW-bi-8vr"/>
+                            <constraint firstItem="Ehz-GA-O5Y" firstAttribute="bottom" secondItem="3Wq-hW-nIy" secondAttribute="bottom" id="TL5-yN-xuN"/>
+                            <constraint firstItem="3Wq-hW-nIy" firstAttribute="top" secondItem="Ehz-GA-O5Y" secondAttribute="top" id="XtP-6H-lWJ"/>
+                            <constraint firstItem="3Wq-hW-nIy" firstAttribute="trailing" secondItem="Ehz-GA-O5Y" secondAttribute="trailing" id="n3X-3g-pLT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="u5Y-p9-EUO"/>
+                    <connections>
+                        <outlet property="backView" destination="3Wq-hW-nIy" id="CMO-aB-1ce"/>
+                        <outlet property="galleryView" destination="MNn-Wh-7sV" id="o6L-Nw-g6K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AYT-Az-mJe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4204" y="-311"/>
         </scene>
         <!--Мои группы-->
         <scene sceneID="p6P-T5-fay">
