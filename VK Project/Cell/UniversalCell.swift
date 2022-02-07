@@ -65,4 +65,20 @@ class UniversalCell: UITableViewCell {
         userImage.image = group.avatar
     }
     
+    func animatedUserImage() {
+        let animation = CASpringAnimation(keyPath: "transform.scale")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.stiffness = 300
+        animation.mass = 4
+        animation.duration = 3
+        animation.fillMode = CAMediaTimingFillMode.removed
+        self.backView.layer.add(animation, forKey: nil)
+    }
+    
+    @IBAction func avatarButton(_ sender: Any) {
+        animatedUserImage()
+    }
+    
+    
 }
