@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1df-W1-ZVC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -88,6 +88,27 @@
                                             <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IjK-Iz-daH"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKq-DH-Bro">
+                                        <rect key="frame" x="164" y="712" width="100" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="v7f-0x-o2T"/>
+                                            <constraint firstAttribute="height" constant="20" id="xW1-3M-ORm"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kig-N4-uRm">
+                                        <rect key="frame" x="260" y="712" width="100" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="F5u-pZ-Qni"/>
+                                            <constraint firstAttribute="width" constant="100" id="ZNY-NM-33P"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DD8-W0-Nhg">
+                                        <rect key="frame" x="64" y="712" width="100" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="LRJ-ZH-dUQ"/>
+                                            <constraint firstAttribute="height" constant="20" id="s3I-iC-lwy"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -96,13 +117,20 @@
                                     <constraint firstItem="wWw-gN-5hc" firstAttribute="centerX" secondItem="Eqd-bl-43r" secondAttribute="centerX" id="CjM-IT-XJg"/>
                                     <constraint firstItem="5te-y0-FKg" firstAttribute="centerX" secondItem="Eqd-bl-43r" secondAttribute="centerX" id="DRT-1Q-zJt"/>
                                     <constraint firstItem="jWc-g3-ig4" firstAttribute="top" secondItem="wWw-gN-5hc" secondAttribute="bottom" id="Gle-EP-9fd"/>
+                                    <constraint firstItem="DD8-W0-Nhg" firstAttribute="leading" secondItem="Eqd-bl-43r" secondAttribute="leading" constant="64" id="KTp-x7-ada"/>
+                                    <constraint firstItem="EKq-DH-Bro" firstAttribute="top" secondItem="RuR-L7-Kl5" secondAttribute="bottom" constant="123" id="N8W-JS-O8S"/>
+                                    <constraint firstAttribute="trailing" secondItem="kig-N4-uRm" secondAttribute="trailing" constant="68" id="NB6-L2-tJi"/>
                                     <constraint firstItem="GX4-NI-6o0" firstAttribute="centerY" secondItem="Eqd-bl-43r" secondAttribute="centerY" id="O8G-et-Ir1"/>
                                     <constraint firstItem="RuR-L7-Kl5" firstAttribute="centerX" secondItem="Eqd-bl-43r" secondAttribute="centerX" id="Oep-Nm-UBi"/>
+                                    <constraint firstAttribute="bottom" secondItem="EKq-DH-Bro" secondAttribute="bottom" constant="216" id="QSY-D8-baP"/>
                                     <constraint firstItem="ICL-IF-gyM" firstAttribute="centerX" secondItem="Eqd-bl-43r" secondAttribute="centerX" id="U14-gu-f77"/>
                                     <constraint firstItem="vZL-uk-AMR" firstAttribute="top" secondItem="GX4-NI-6o0" secondAttribute="bottom" constant="10" id="Uso-hw-Cnm"/>
                                     <constraint firstItem="GX4-NI-6o0" firstAttribute="centerX" secondItem="Eqd-bl-43r" secondAttribute="centerX" id="Xl0-Oo-pZ7"/>
                                     <constraint firstItem="5te-y0-FKg" firstAttribute="top" secondItem="jWc-g3-ig4" secondAttribute="bottom" constant="30" id="bem-rT-RmN"/>
+                                    <constraint firstItem="kig-N4-uRm" firstAttribute="centerY" secondItem="EKq-DH-Bro" secondAttribute="centerY" id="eNG-5l-ZWN"/>
                                     <constraint firstItem="RuR-L7-Kl5" firstAttribute="top" secondItem="vZL-uk-AMR" secondAttribute="bottom" constant="30" id="edQ-To-XBV"/>
+                                    <constraint firstItem="EKq-DH-Bro" firstAttribute="centerX" secondItem="Eqd-bl-43r" secondAttribute="centerX" id="j5F-bY-WAY"/>
+                                    <constraint firstItem="DD8-W0-Nhg" firstAttribute="centerY" secondItem="EKq-DH-Bro" secondAttribute="centerY" id="kA8-9A-94p"/>
                                     <constraint firstItem="jWc-g3-ig4" firstAttribute="centerX" secondItem="Eqd-bl-43r" secondAttribute="centerX" id="lfD-SN-8aU"/>
                                     <constraint firstItem="GX4-NI-6o0" firstAttribute="top" secondItem="ICL-IF-gyM" secondAttribute="bottom" constant="10" id="uFg-dH-xj3"/>
                                 </constraints>
@@ -119,6 +147,9 @@
                     </view>
                     <connections>
                         <outlet property="backView" destination="Eqd-bl-43r" id="mbl-wR-ugC"/>
+                        <outlet property="loadingView1" destination="DD8-W0-Nhg" id="nK9-4y-NbU"/>
+                        <outlet property="loadingView2" destination="EKq-DH-Bro" id="2H4-OR-5fN"/>
+                        <outlet property="loadingView3" destination="kig-N4-uRm" id="gsH-Df-VGp"/>
                         <outlet property="loginLabel" destination="5te-y0-FKg" id="zbE-pN-wVo"/>
                         <outlet property="loginTextField" destination="ICL-IF-gyM" id="BFa-ic-tav"/>
                         <outlet property="nameProjectLabel" destination="jWc-g3-ig4" id="lH9-io-vQU"/>
@@ -130,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140.57971014492756" y="61.607142857142854"/>
+            <point key="canvasLocation" x="140.18691588785046" y="61.555075593952488"/>
         </scene>
         <!--User Tab Bar Controller View Controller-->
         <scene sceneID="wMo-pc-PhD">
