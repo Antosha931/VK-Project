@@ -9,13 +9,20 @@ import UIKit
 
 class FriendsTableViewController: UITableViewController {
     
-    @IBOutlet var friendsTableView: UITableView!
+    @IBOutlet var friendsTableView: UITableView! {
+        didSet {
+            friendsTableView.delegate = self
+            friendsTableView.dataSource = self
+        }
+    }
     
     var friendsArray = [User]()
     var savedObject: Any?
+    let dataSetingsUser = DataSettings()
     
     let reuseIdentifierUserTableCell = "UserCell"
     let segueIdentifierToFotoController = "segueIdentifierToFotoController"
+//    let segueIdentifierToGalleryPhoto = "segueIdentifierToGalleryPhoto"
     
     func sortingUserNames() -> [String] {
         var lettersArray: [String] = []
@@ -48,11 +55,10 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        friendsArray = dataSetingsUser.setupUser()
+        
         self.clearsSelectionOnViewWillAppear = false
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
         
         friendsTableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserTableCell)
     }
@@ -81,18 +87,18 @@ class FriendsTableViewController: UITableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? UniversalCell,
-              let cellObject = cell.savedObject as? User else { return }
-        performSegue(withIdentifier: segueIdentifierToFotoController, sender: cellObject)
-    }
-    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         friendsArray.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     // MARK: - Table view Delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+           guard let cell = tableView.cellForRow(at: indexPath) as? UniversalCell,
+                 let cellObject = cell.savedObject as? User else { return }
+           performSegue(withIdentifier: segueIdentifierToFotoController, sender: cellObject)
+       }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
