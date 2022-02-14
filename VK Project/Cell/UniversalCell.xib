@@ -23,13 +23,23 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8xi-92-bBA">
                                 <rect key="frame" x="0.0" y="0.0" width="133" height="133"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUS-jh-0pa">
+                                <rect key="frame" x="0.0" y="0.0" width="133" height="133"/>
+                                <connections>
+                                    <action selector="avatarButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="P1o-eb-dFN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="zUS-jh-0pa" secondAttribute="bottom" id="3tF-zO-s1J"/>
+                            <constraint firstItem="zUS-jh-0pa" firstAttribute="leading" secondItem="iAY-gM-ieN" secondAttribute="leading" id="5w2-E6-ukJ"/>
+                            <constraint firstAttribute="trailing" secondItem="zUS-jh-0pa" secondAttribute="trailing" id="9un-vQ-scC"/>
                             <constraint firstAttribute="trailing" secondItem="8xi-92-bBA" secondAttribute="trailing" id="McK-rc-s6q"/>
                             <constraint firstItem="8xi-92-bBA" firstAttribute="top" secondItem="iAY-gM-ieN" secondAttribute="top" id="Sjg-EF-oKZ"/>
                             <constraint firstAttribute="width" secondItem="iAY-gM-ieN" secondAttribute="height" multiplier="1:1" id="aaZ-xw-9u8"/>
                             <constraint firstItem="8xi-92-bBA" firstAttribute="leading" secondItem="iAY-gM-ieN" secondAttribute="leading" id="hdH-My-G6r"/>
+                            <constraint firstItem="zUS-jh-0pa" firstAttribute="top" secondItem="iAY-gM-ieN" secondAttribute="top" id="pM0-OR-wIC"/>
                             <constraint firstAttribute="bottom" secondItem="8xi-92-bBA" secondAttribute="bottom" id="y5E-sy-f0g"/>
                         </constraints>
                     </view>

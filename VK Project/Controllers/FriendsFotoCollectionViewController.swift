@@ -7,9 +7,10 @@
 
 import UIKit
 
-private let reuseIdentifier = "FotoCell"
 
 class FriendsFotoCollectionViewController: UICollectionViewController {
+    
+    private let reuseIdentifier = "FotoCell"
     
     var photoArray = [UIImage]()
     
