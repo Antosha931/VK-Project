@@ -48,10 +48,6 @@ class FriendsTableViewController: UITableViewController {
         return lettersOfName
     }
     
-    func configure(userArray: [User]) {
-            self.friendsArray = userArray
-        }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,7 +58,7 @@ class FriendsTableViewController: UITableViewController {
         
         friendsTableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserTableCell)
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -122,3 +118,4 @@ class FriendsTableViewController: UITableViewController {
         }
     }
 }
+ 
