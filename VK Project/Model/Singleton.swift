@@ -11,6 +11,10 @@ final class SomeSingleton {
     var token: String = ""
     var userID: Int = 0
     
+    var userIdString: String {
+        return String(userID)
+    }
+    
     static let instance = SomeSingleton()
     
     private init() { }

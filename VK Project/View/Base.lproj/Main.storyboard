@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1df-W1-ZVC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yxo-YF-cnn">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -10,6 +10,41 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Login Web Kit View Controller-->
+        <scene sceneID="HLu-EI-IRF">
+            <objects>
+                <viewController id="Yxo-YF-cnn" customClass="LoginWebKitViewController" customModule="VK_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lFW-hc-OWa">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RAw-5g-Tm1">
+                                <rect key="frame" x="0.0" y="44" width="428" height="848"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tJ8-Y7-bdC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tJ8-Y7-bdC" firstAttribute="bottom" secondItem="RAw-5g-Tm1" secondAttribute="bottom" id="5cT-Sf-dv3"/>
+                            <constraint firstItem="tJ8-Y7-bdC" firstAttribute="trailing" secondItem="RAw-5g-Tm1" secondAttribute="trailing" id="KWm-ry-mze"/>
+                            <constraint firstItem="RAw-5g-Tm1" firstAttribute="top" secondItem="tJ8-Y7-bdC" secondAttribute="top" id="WnR-uG-uRx"/>
+                            <constraint firstItem="RAw-5g-Tm1" firstAttribute="leading" secondItem="tJ8-Y7-bdC" secondAttribute="leading" id="c0O-aY-xxz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loginWebView" destination="RAw-5g-Tm1" id="zhW-2n-WQa"/>
+                        <segue destination="1df-W1-ZVC" kind="presentation" identifier="IdentifierToTabBarController" modalPresentationStyle="fullScreen" id="q1r-kS-M5F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yxq-aQ-xum" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1117" y="34"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -479,6 +514,9 @@
             <point key="canvasLocation" x="1692" y="-311"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="q1r-kS-M5F"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="books.vertical" catalog="system" width="128" height="103"/>
         <image name="newspaper" catalog="system" width="128" height="108"/>
