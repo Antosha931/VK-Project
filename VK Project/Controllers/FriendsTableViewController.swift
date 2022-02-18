@@ -19,10 +19,10 @@ class FriendsTableViewController: UITableViewController {
     var friendsArray = [User]()
     var savedObject: Any?
     let dataSetingsUser = DataSettings()
+    let networking = NetworkService()
     
     let reuseIdentifierUserTableCell = "UserCell"
     let segueIdentifierToFotoController = "segueIdentifierToFotoController"
-//    let segueIdentifierToGalleryPhoto = "segueIdentifierToGalleryPhoto"
     
     func sortingUserNames() -> [String] {
         var lettersArray: [String] = []
@@ -52,6 +52,11 @@ class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         friendsArray = dataSetingsUser.setupUser()
+        
+        let jsonFriends = networking.fetchUserFriends()
+        let jsonGroup = networking.fetchUserGroup()
+        let jsonGlobalGroup = networking.fetchGlobalGroup(groupSearch: "MDK")
+        
         
         self.clearsSelectionOnViewWillAppear = false
         self.navigationItem.rightBarButtonItem = self.editButtonItem

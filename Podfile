@@ -7,4 +7,6 @@ target 'VK Project' do
 
   # Pods for VK Project
 
+	pod 'Alamofire', '~> 5.5'
+
 end
