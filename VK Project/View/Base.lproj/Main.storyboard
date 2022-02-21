@@ -38,12 +38,12 @@
                     </view>
                     <connections>
                         <outlet property="loginWebView" destination="RAw-5g-Tm1" id="zhW-2n-WQa"/>
-                        <segue destination="1df-W1-ZVC" kind="presentation" identifier="IdentifierToTabBarController" modalPresentationStyle="fullScreen" id="q1r-kS-M5F"/>
+                        <segue destination="1df-W1-ZVC" kind="presentation" identifier="IdentifierToTabBarController" modalPresentationStyle="fullScreen" id="RqN-Lw-tu0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yxq-aQ-xum" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1117" y="34"/>
+            <point key="canvasLocation" x="-14" y="63"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -180,6 +180,7 @@
                             <constraint firstItem="Eqd-bl-43r" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-50" id="ncI-WA-KiT"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="etf-Cp-Z4J"/>
                     <connections>
                         <outlet property="backView" destination="Eqd-bl-43r" id="mbl-wR-ugC"/>
                         <outlet property="loadingView1" destination="DD8-W0-Nhg" id="nK9-4y-NbU"/>
@@ -191,12 +192,11 @@
                         <outlet property="passwordLabel" destination="GX4-NI-6o0" id="IFN-zq-ieD"/>
                         <outlet property="passwordTextField" destination="vZL-uk-AMR" id="4TN-r9-sOy"/>
                         <outlet property="titleImageView" destination="wWw-gN-5hc" id="Rg1-Li-W52"/>
-                        <segue destination="1df-W1-ZVC" kind="presentation" identifier="reuseIdentifierToTabBar" modalPresentationStyle="fullScreen" id="jyc-IP-0tP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140.18691588785046" y="61.555075593952488"/>
+            <point key="canvasLocation" x="931" y="-650"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="wMo-pc-PhD">
@@ -514,9 +514,6 @@
             <point key="canvasLocation" x="1692" y="-311"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="q1r-kS-M5F"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="books.vertical" catalog="system" width="128" height="103"/>
         <image name="newspaper" catalog="system" width="128" height="108"/>

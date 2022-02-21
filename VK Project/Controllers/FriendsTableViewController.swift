@@ -16,31 +16,41 @@ class FriendsTableViewController: UITableViewController {
         }
     }
     
-    var friendsArray = [User]()
     var savedObject: Any?
-    let dataSetingsUser = DataSettings()
-    let networking = NetworkService()
     
-    let reuseIdentifierUserTableCell = "UserCell"
-    let segueIdentifierToFotoController = "segueIdentifierToFotoController"
+    private let dataSetingsUser = DataSettings()
+    private let networking = NetworkService()
+    private var friendsItems = [ItemsFriend]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.friendsTableView.reloadData()
+            }
+        }
+    }
     
-    func sortingUserNames() -> [String] {
+    private let reuseIdentifierUserTableCell = "UserCell"
+    private let segueIdentifierToFotoController = "segueIdentifierToFotoController"
+    
+    private func sortingUserNames() -> [String] {
         var lettersArray: [String] = []
         
-        for user in friendsArray {
-            let letter = String(user.name.prefix(1))
+        for user in friendsItems {
+            let letter = String(user.lastName.prefix(1))
             if !lettersArray.contains(letter) {
                 lettersArray.append(letter)
             }
         }
-        return lettersArray
+        
+        let sortiredNames = lettersArray.sorted(by: {$0 < $1})
+        
+        return sortiredNames
     }
     
-    func filterByAlphabet(lettersArray: String) -> [User] {
-        var lettersOfName: [User] = []
+    private func filterByAlphabet(lettersArray: String) -> [ItemsFriend] {
+        var lettersOfName: [ItemsFriend] = []
         
-        for item in friendsArray {
-            let nameLetter = String(item.name.prefix(1))
+        for item in friendsItems {
+            let nameLetter = String(item.lastName.prefix(1))
             if nameLetter == lettersArray {
                 lettersOfName.append(item)
             }
@@ -51,15 +61,16 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        friendsArray = dataSetingsUser.setupUser()
-        
-        let jsonFriends = networking.fetchUserFriends()
-        let jsonGroup = networking.fetchUserGroup()
-        let jsonGlobalGroup = networking.fetchGlobalGroup(groupSearch: "MDK")
-        
+        networking.fetchUserFriends { [weak self] result in
+            switch result {
+            case .success(let friends):
+                self?.friendsItems = friends
+            case .failure(let error):
+                print(error)
+            }
+        }
         
         self.clearsSelectionOnViewWillAppear = false
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         friendsTableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserTableCell)
     }
@@ -79,25 +90,23 @@ class FriendsTableViewController: UITableViewController {
                 as? UniversalCell else { return UITableViewCell() }
         
         let arrayLetter = filterByAlphabet(lettersArray: sortingUserNames()[indexPath.section])
-        cell.configure(user: arrayLetter[indexPath.row])
+        
+        if let friendsItems = Friend(friendsItems: arrayLetter[indexPath.row]) {
+            cell.configure(user: friendsItems)
+        }
         
         return cell
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        friendsArray.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        return false
     }
     
     // MARK: - Table view Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
            guard let cell = tableView.cellForRow(at: indexPath) as? UniversalCell,
-                 let cellObject = cell.savedObject as? User else { return }
+                 let cellObject = cell.savedObject as? Friend else { return }
            performSegue(withIdentifier: segueIdentifierToFotoController, sender: cellObject)
        }
     
@@ -118,8 +127,8 @@ class FriendsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifierToFotoController,
            let dst = segue.destination as? FriendsFotoCollectionViewController,
-           let user = sender as? User {
-            dst.photoArray = user.photoArray!
+           let friend = sender as? Friend {
+            dst.friendId = friend.friendId
         }
     }
 }

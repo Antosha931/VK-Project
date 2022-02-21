@@ -7,7 +7,8 @@
 
 import Foundation
 
-final class SomeSingleton {
+final class Session {
+    
     var token: String = ""
     var userID: Int = 0
     
@@ -15,7 +16,7 @@ final class SomeSingleton {
         return String(userID)
     }
     
-    static let instance = SomeSingleton()
+    static let instance = Session()
     
     private init() { }
 }
