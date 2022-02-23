@@ -17,11 +17,11 @@ class FotoCollectionViewCell: UICollectionViewCell {
     
     var savedObject: Any?
     
-    var numberLikes = Int()
+    private var numberLikes = Int()
     
-    var statusLike = Bool()
+    private var statusLike = Bool()
     
-    func setup() {
+    private func setup() {
         likeImage.tintColor = UIColor.red
         numberLikeLabel.textColor = UIColor.black
         numberLikeLabel.textAlignment = .center
@@ -37,7 +37,7 @@ class FotoCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func clearCell() {
+    private func clearCell() {
         savedObject = nil
         photoImageView.image = nil
         numberLikeLabel.text = nil
@@ -61,7 +61,7 @@ class FotoCollectionViewCell: UICollectionViewCell {
         clearCell()
     }
     
-    func animateLikeButton() {
+    private func animateLikeButton() {
         UIView.transition(with: likeImage,
                           duration: 1,
                           options: .transitionFlipFromLeft,
@@ -76,7 +76,7 @@ class FotoCollectionViewCell: UICollectionViewCell {
                           })
     }
     
-    func animateCancelLikeButton() {
+    private func animateCancelLikeButton() {
         UIView.transition(with: likeImage,
                           duration: 1,
                           options: .transitionCrossDissolve,

@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Friends.swift
 //  VK Project
 //
 //  Created by Антон Титов on 18.01.2022.
@@ -23,14 +23,6 @@ struct Friend {
         self.friendId = friendsItems.id
         self.firstName = friendsItems.firstName
         self.lastName = friendsItems.lastName
-        self.avatar = downloadPhoto(urlString: friendsItems.avatarPhoto)
-    }
-    
-    func downloadPhoto(urlString: String) -> UIImage? {
-        
-        guard let url = URL(string: urlString),
-              let data = try? Data(contentsOf: url),
-              let image = UIImage(data: data) else { return nil }
-        return image
+        self.avatar = PhotoProcessing().downloadPhoto(urlString: friendsItems.avatarPhoto)
     }
 }

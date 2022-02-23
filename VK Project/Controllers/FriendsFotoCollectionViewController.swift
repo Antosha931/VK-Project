@@ -14,6 +14,7 @@ class FriendsFotoCollectionViewController: UICollectionViewController {
     private let segueIdentifierToGalleryPhoto = "segueIdentifierToGalleryPhoto"
     
     var friendId = Int()
+    var photoIndex = Int()
     
     private let networking = NetworkService()
     private var photoItems = [ItemsPhotoArray]() {
@@ -67,6 +68,7 @@ class FriendsFotoCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        photoIndex = indexPath.item
         performSegue(withIdentifier: segueIdentifierToGalleryPhoto, sender: photoArray)
     }
     
@@ -76,6 +78,7 @@ class FriendsFotoCollectionViewController: UICollectionViewController {
         if segue.identifier == segueIdentifierToGalleryPhoto,
            let dst = segue.destination as? GalleryPhotoViewController {
             dst.photoArray = self.photoArray
+            dst.photoIndex = self.photoIndex
         }
     }
 }

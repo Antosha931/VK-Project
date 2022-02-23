@@ -21,19 +21,11 @@ struct Photos {
         self.likesCount = itemsPhoto.likes.likesCount
         self.ownerId = itemsPhoto.ownerId
         self.userLikeStatus = likeProcessing(likeStatus: itemsPhoto.likes.userLikeStatus)
-        self.photo = downloadPhoto(urlString: itemsPhoto.photoSize.last?.photoUrlString)
+        self.photo = PhotoProcessing().downloadPhoto(urlString: itemsPhoto.photoSize.last!.photoUrlString)
     }
     
     func likeProcessing(likeStatus: Int) -> Bool {
         if likeStatus == 1 { return true }
         return false
-    }
-    
-    func downloadPhoto(urlString: String?) -> UIImage? {
-        
-        guard let url = URL(string: urlString ?? ""),
-              let data = try? Data(contentsOf: url),
-              let image = UIImage(data: data) else { return nil }
-        return image
     }
 }

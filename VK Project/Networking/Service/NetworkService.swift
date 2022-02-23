@@ -40,7 +40,8 @@ class NetworkService {
                   let data = data else { return }
             
             do {
-                let friendsData = try JSONDecoder().decode(DataFriends.self, from: data)
+                let friendsData = try JSONDecoder().decode(VKResponse<ResponseFriends>.self, from: data)
+                
                 completion(.success(friendsData.response.items))
                 
             } catch let error as NSError {
@@ -71,8 +72,9 @@ class NetworkService {
                   let data = data else { return }
             
             do {
-                let groupsData = try JSONDecoder().decode(DataGroups.self, from: data)
-                completion(.success(groupsData.response.items))
+                let friendsData = try JSONDecoder().decode(VKResponse<ResponseGroups>.self, from: data)
+                
+                completion(.success(friendsData.response.items))
                 
             } catch let error as NSError {
                 completion(.failure(error))
@@ -101,10 +103,11 @@ class NetworkService {
         let task = session.dataTask(with: url) { data, response, error in
             guard error == nil,
                   let data = data else { return }
-         
+            
             do {
-                let groupsData = try JSONDecoder().decode(DataGroups.self, from: data)
-                completion(.success(groupsData.response.items))
+                let friendsData = try JSONDecoder().decode(VKResponse<ResponseGroups>.self, from: data)
+                
+                completion(.success(friendsData.response.items))
                 
             } catch let error as NSError {
                 completion(.failure(error))
@@ -136,8 +139,9 @@ class NetworkService {
                   let data = data else { return }
             
             do {
-                let groupsData = try JSONDecoder().decode(DataPhotoFriend.self, from: data)
-                completion(.success(groupsData.response.items))
+                let friendsData = try JSONDecoder().decode(VKResponse<ResponsePhotoArray>.self, from: data)
+                
+                completion(.success(friendsData.response.items))
                 
             } catch let error as NSError {
                 completion(.failure(error))

@@ -7,15 +7,6 @@
 
 import Foundation
 
-struct DataPhotoFriend: Codable {
-    
-    let response: ResponsePhotoArray
-    
-    enum CodingKeys: String, CodingKey {
-        case response
-    }
-}
-
 struct ResponsePhotoArray: Codable {
     
     let items: [ItemsPhotoArray]

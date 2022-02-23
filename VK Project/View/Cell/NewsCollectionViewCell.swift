@@ -18,11 +18,11 @@ class NewsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var shareNewsButton: UIButton!
     @IBOutlet weak var numberOfViewsLabel: UILabel!
     
-    var savedObject: Any?
-    var numberOfViews = 0
-    var statusLikeButton = false
+    private var savedObject: Any?
+    private var numberOfViews = Int()
+    private var statusLikeButton = false
     
-    func setup() {
+    private func setup() {
         backVew.backgroundColor = #colorLiteral(red: 0.9175563373, green: 0.9175563373, blue: 0.9175563373, alpha: 1)
         activeItemBackView.backgroundColor = backVew.backgroundColor
         newsTextLabel.textColor = .black
@@ -42,16 +42,11 @@ class NewsCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func clearCell() {
+    private func clearCell() {
         savedObject = nil
         newsTextLabel.text = nil
         newsImageView.image = nil
         numberOfViewsLabel.text = nil
-    }
-    
-    func configure(newsText: String, newsImage: UIImage) {
-        newsTextLabel.text = newsText
-        newsImageView.image = newsImage
     }
     
     func configure(news: News) {

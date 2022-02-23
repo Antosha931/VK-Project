@@ -18,9 +18,8 @@ class FriendsTableViewController: UITableViewController {
     
     var savedObject: Any?
     
-    private let dataSetingsUser = DataSettings()
     private let networking = NetworkService()
-    private var friendsItems = [ItemsFriend]() {
+    private var friendsArray = [ItemsFriend]() {
         didSet {
             DispatchQueue.main.async {
                 self.friendsTableView.reloadData()
@@ -31,10 +30,10 @@ class FriendsTableViewController: UITableViewController {
     private let reuseIdentifierUserTableCell = "UserCell"
     private let segueIdentifierToFotoController = "segueIdentifierToFotoController"
     
-    private func sortingUserNames() -> [String] {
+    private func sortingFriendsNames() -> [String] {
         var lettersArray: [String] = []
         
-        for user in friendsItems {
+        for user in friendsArray {
             let letter = String(user.lastName.prefix(1))
             if !lettersArray.contains(letter) {
                 lettersArray.append(letter)
@@ -49,7 +48,7 @@ class FriendsTableViewController: UITableViewController {
     private func filterByAlphabet(lettersArray: String) -> [ItemsFriend] {
         var lettersOfName: [ItemsFriend] = []
         
-        for item in friendsItems {
+        for item in friendsArray {
             let nameLetter = String(item.lastName.prefix(1))
             if nameLetter == lettersArray {
                 lettersOfName.append(item)
@@ -64,7 +63,7 @@ class FriendsTableViewController: UITableViewController {
         networking.fetchUserFriends { [weak self] result in
             switch result {
             case .success(let friends):
-                self?.friendsItems = friends
+                self?.friendsArray = friends
             case .failure(let error):
                 print(error)
             }
@@ -78,21 +77,21 @@ class FriendsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return sortingUserNames().count
+        return sortingFriendsNames().count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filterByAlphabet(lettersArray: sortingUserNames()[section]).count
+        return filterByAlphabet(lettersArray: sortingFriendsNames()[section]).count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUserTableCell, for: indexPath)
                 as? UniversalCell else { return UITableViewCell() }
         
-        let arrayLetter = filterByAlphabet(lettersArray: sortingUserNames()[indexPath.section])
+        let arrayLetter = filterByAlphabet(lettersArray: sortingFriendsNames()[indexPath.section])
         
-        if let friendsItems = Friend(friendsItems: arrayLetter[indexPath.row]) {
-            cell.configure(user: friendsItems)
+        if let itemsFriends = Friend(friendsItems: arrayLetter[indexPath.row]) {
+            cell.configure(user: itemsFriends)
         }
         
         return cell
@@ -115,7 +114,7 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sortingUserNames()[section].uppercased()
+        return sortingFriendsNames()[section].uppercased()
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

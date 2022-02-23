@@ -8,7 +8,7 @@
 import UIKit
 
 class GalleryPhotoCustomView: UIView {
-
+    
     private var view: UIView?
     
     private var interactiveAnimator: UIViewPropertyAnimator!
@@ -19,7 +19,7 @@ class GalleryPhotoCustomView: UIView {
     private var isLeftSwipe = false
     private var isRightSwipe = false
     private var chooseFlag = false
-    private var currentIndex = 0
+    private var currentIndex = Int()
     private var customPageView = UIPageControl()
     
     override init(frame: CGRect) {
@@ -216,12 +216,13 @@ class GalleryPhotoCustomView: UIView {
     }
     
     
-    func setImages(images: [UIImage]) {
+    func setImages(images: [UIImage], index: Int) {
         self.images = images
+        self.currentIndex = index
         if self.images.count > 0 {
-            self.firstImageView.image = self.images.first
+            self.firstImageView.image = self.images[index]
         }
         customPageView.numberOfPages = self.images.count
-        
+        customPageView.currentPage = index
     }
 }

@@ -7,15 +7,6 @@
 
 import Foundation
 
-struct DataFriends: Codable {
-    
-    let response: ResponseFriends
-    
-    enum CodingKeys: String, CodingKey {
-        case response
-    }
-}
-
 struct ResponseFriends: Codable {
     
     let items: [ItemsFriend]
