@@ -20,12 +20,8 @@ class NewsViewController: UIViewController {
     
     private var newsArray = [News]()
     
-    private let dataSetingsNews = DataSettings()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        newsArray = dataSetingsNews.setupNews()
         
         collectionView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         

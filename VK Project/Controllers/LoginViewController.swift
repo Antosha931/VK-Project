@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loadingView3: UIView!
     
     let segueIdentifierToTabBar = "reuseIdentifierToTabBar"
+    let networking = NetworkService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

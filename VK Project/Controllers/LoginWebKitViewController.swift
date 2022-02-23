@@ -19,8 +19,8 @@ class LoginWebKitViewController: UIViewController {
     let segueIdentifier = "IdentifierToTabBarController"
     
     @IBAction func unwindToVKLogin(_ segue: UIStoryboardSegue) {
-        SomeSingleton.instance.token = ""
-        SomeSingleton.instance.userID = 0
+        Session.instance.token = ""
+        Session.instance.userID = 0
         let dataStore = WKWebsiteDataStore.default()
         dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             records.forEach {
@@ -89,8 +89,8 @@ extension LoginWebKitViewController: WKNavigationDelegate {
                   let userID = Int(userIDString)
             else { return decisionHandler(.allow) }
             
-            SomeSingleton.instance.token = token
-            SomeSingleton.instance.userID = userID
+            Session.instance.token = token
+            Session.instance.userID = userID
             
             performSegue(withIdentifier: segueIdentifier, sender: nil)
             

@@ -19,8 +19,7 @@ class UniversalCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupCell() {
-        userLabel.font = userLabel.font.withSize(25)
+    private func setupCell() {
         userLabel.textAlignment = .center
         userLabel.textColor = .black
         backView.layer.cornerRadius = 40
@@ -28,11 +27,11 @@ class UniversalCell: UITableViewCell {
         userImage.backgroundColor = .clear
         backView.layer.shadowColor = UIColor.black.cgColor
         backView.layer.shadowOffset = CGSize(width: 10, height: 10)
-        backView.layer.shadowRadius = 10
+        backView.layer.shadowRadius = 5
         backView.layer.shadowOpacity = 0.5
     }
     
-    func clearCell() {
+    private func clearCell() {
         userImage.image = nil
         userLabel.text = nil
     }
@@ -47,25 +46,20 @@ class UniversalCell: UITableViewCell {
         setupCell()
         clearCell()
         }
-
-    func configure(image: UIImage?, label: String?) {
-        userImage.image = image
-        userLabel.text = label
-    }
     
-    func configure(user: User) {
+    func configure(user: Friend) {
         savedObject = user
-        userLabel.text = user.name
+        userLabel.text = user.fullName
         userImage.image = user.avatar
     }
     
-    func configure(group: Group) {
+    func configure(group: Groups) {
         savedObject = group
         userLabel.text = group.name
         userImage.image = group.avatar
     }
     
-    func animatedUserImage() {
+    private func animatedUserImage() {
         let animation = CASpringAnimation(keyPath: "transform.scale")
         animation.fromValue = 0
         animation.toValue = 1
