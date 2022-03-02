@@ -43,21 +43,21 @@
                             <constraint firstAttribute="bottom" secondItem="8xi-92-bBA" secondAttribute="bottom" id="y5E-sy-f0g"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKJ-Kr-tMc">
-                        <rect key="frame" x="163" y="31" width="292" height="91"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="BKJ-Kr-tMc">
+                        <rect key="frame" x="153" y="10" width="332" height="133"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="BKJ-Kr-tMc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="82S-rN-y6f"/>
+                    <constraint firstItem="BKJ-Kr-tMc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="32t-mm-uSE"/>
+                    <constraint firstAttribute="bottom" secondItem="BKJ-Kr-tMc" secondAttribute="bottom" constant="10" id="4Ke-A3-27b"/>
                     <constraint firstItem="iAY-gM-ieN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Dj8-4Y-tpx"/>
-                    <constraint firstItem="BKJ-Kr-tMc" firstAttribute="leading" secondItem="iAY-gM-ieN" secondAttribute="trailing" constant="20" id="ROx-4e-IRT"/>
+                    <constraint firstItem="BKJ-Kr-tMc" firstAttribute="leading" secondItem="iAY-gM-ieN" secondAttribute="trailing" constant="10" id="ROx-4e-IRT"/>
                     <constraint firstAttribute="bottom" secondItem="iAY-gM-ieN" secondAttribute="bottom" constant="10" id="TUG-1I-b88"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="BKJ-Kr-tMc" secondAttribute="bottom" constant="20" id="fk0-xY-ehg"/>
+                    <constraint firstAttribute="trailing" secondItem="BKJ-Kr-tMc" secondAttribute="trailing" constant="10" id="lnc-df-wgf"/>
                     <constraint firstItem="iAY-gM-ieN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="n1P-Uy-VR6"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="BKJ-Kr-tMc" secondAttribute="trailing" constant="20" id="oCB-HK-XmZ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

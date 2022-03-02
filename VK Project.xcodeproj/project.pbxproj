@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2A026E8827BE801B001FB674 /* LoginWebKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A026E8727BE801B001FB674 /* LoginWebKitViewController.swift */; };
 		2A026E8B27BE80FC001FB674 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A026E8A27BE80FC001FB674 /* NetworkService.swift */; };
+		2A026E8F27C17A33001FB674 /* DataFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A026E8E27C17A33001FB674 /* DataFriends.swift */; };
+		2A026E9827C296F9001FB674 /* DataGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A026E9727C296F9001FB674 /* DataGroups.swift */; };
+		2A026E9B27C2972C001FB674 /* DataPhotoFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A026E9A27C2972C001FB674 /* DataPhotoFriends.swift */; };
 		2A431EA02783A357004688BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A431E9F2783A357004688BC /* AppDelegate.swift */; };
 		2A431EA22783A357004688BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A431EA12783A357004688BC /* SceneDelegate.swift */; };
 		2A431EA42783A357004688BC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A431EA32783A357004688BC /* LoginViewController.swift */; };
@@ -25,8 +28,8 @@
 		2A67C69727ADD03C0069D821 /* GalleryPhotoCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A67C69627ADD03B0069D821 /* GalleryPhotoCustomView.swift */; };
 		2A67C69C27ADD0AA0069D821 /* GalleryPhotoCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A67C69B27ADD0AA0069D821 /* GalleryPhotoCustomView.xib */; };
 		2A67C69F27ADD4BA0069D821 /* GalleryPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A67C69E27ADD4BA0069D821 /* GalleryPhotoViewController.swift */; };
-		2A6CFCB3279621C3006CD528 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CFCB2279621C3006CD528 /* User.swift */; };
-		2A6CFCB6279621DF006CD528 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CFCB5279621DF006CD528 /* Group.swift */; };
+		2A6CFCB3279621C3006CD528 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CFCB2279621C3006CD528 /* Friend.swift */; };
+		2A6CFCB6279621DF006CD528 /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CFCB5279621DF006CD528 /* Groups.swift */; };
 		2A6CFCBA2796279C006CD528 /* UniversalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CFCB82796279C006CD528 /* UniversalCell.swift */; };
 		2A6CFCBB2796279C006CD528 /* UniversalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A6CFCB92796279C006CD528 /* UniversalCell.xib */; };
 		2A6CFCC127962F71006CD528 /* FriendsFotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CFCC027962F71006CD528 /* FriendsFotoCollectionViewController.swift */; };
@@ -34,12 +37,16 @@
 		2A6CFCC727963DA6006CD528 /* FotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A6CFCC527963DA6006CD528 /* FotoCollectionViewCell.xib */; };
 		2A6CFCCB27964336006CD528 /* GlobalGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CFCCA27964336006CD528 /* GlobalGroupTableViewController.swift */; };
 		2ACBFE3D27B072B1008D068B /* DataSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACBFE3C27B072B1008D068B /* DataSettings.swift */; };
+		2AE6827427C3C4C100692AF4 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE6827327C3C4C100692AF4 /* Photos.swift */; };
 		6376A59432C4798CFE2BBC23 /* Pods_VK_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C596BDA5E6B1FEB53BB8A751 /* Pods_VK_Project.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2A026E8727BE801B001FB674 /* LoginWebKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebKitViewController.swift; sourceTree = "<group>"; };
 		2A026E8A27BE80FC001FB674 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		2A026E8E27C17A33001FB674 /* DataFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFriends.swift; sourceTree = "<group>"; };
+		2A026E9727C296F9001FB674 /* DataGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGroups.swift; sourceTree = "<group>"; };
+		2A026E9A27C2972C001FB674 /* DataPhotoFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPhotoFriends.swift; sourceTree = "<group>"; };
 		2A431E9C2783A356004688BC /* VK Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VK Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A431E9F2783A357004688BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A431EA12783A357004688BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,8 +65,8 @@
 		2A67C69627ADD03B0069D821 /* GalleryPhotoCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryPhotoCustomView.swift; sourceTree = "<group>"; };
 		2A67C69B27ADD0AA0069D821 /* GalleryPhotoCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryPhotoCustomView.xib; sourceTree = "<group>"; };
 		2A67C69E27ADD4BA0069D821 /* GalleryPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryPhotoViewController.swift; sourceTree = "<group>"; };
-		2A6CFCB2279621C3006CD528 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		2A6CFCB5279621DF006CD528 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		2A6CFCB2279621C3006CD528 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		2A6CFCB5279621DF006CD528 /* Groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
 		2A6CFCB82796279C006CD528 /* UniversalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalCell.swift; sourceTree = "<group>"; };
 		2A6CFCB92796279C006CD528 /* UniversalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UniversalCell.xib; sourceTree = "<group>"; };
 		2A6CFCC027962F71006CD528 /* FriendsFotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsFotoCollectionViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +74,7 @@
 		2A6CFCC527963DA6006CD528 /* FotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FotoCollectionViewCell.xib; path = "VK Project/Cell/FotoCollectionViewCell.xib"; sourceTree = SOURCE_ROOT; };
 		2A6CFCCA27964336006CD528 /* GlobalGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalGroupTableViewController.swift; sourceTree = "<group>"; };
 		2ACBFE3C27B072B1008D068B /* DataSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSettings.swift; sourceTree = "<group>"; };
+		2AE6827327C3C4C100692AF4 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		9824B5BA533D5CC660E3A9F9 /* Pods-VK Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK Project.debug.xcconfig"; path = "Target Support Files/Pods-VK Project/Pods-VK Project.debug.xcconfig"; sourceTree = "<group>"; };
 		B641E07506A8E5D4BAA9CBD7 /* Pods-VK Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK Project.release.xcconfig"; path = "Target Support Files/Pods-VK Project/Pods-VK Project.release.xcconfig"; sourceTree = "<group>"; };
 		C596BDA5E6B1FEB53BB8A751 /* Pods_VK_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VK_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +92,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A026E8D27C17977001FB674 /* NetworkDataStruct */ = {
+			isa = PBXGroup;
+			children = (
+				2A026E8E27C17A33001FB674 /* DataFriends.swift */,
+				2A026E9727C296F9001FB674 /* DataGroups.swift */,
+				2A026E9A27C2972C001FB674 /* DataPhotoFriends.swift */,
+			);
+			path = NetworkDataStruct;
+			sourceTree = "<group>";
+		};
 		2A431E932783A356004688BC = {
 			isa = PBXGroup;
 			children = (
@@ -153,9 +171,10 @@
 		2A67C6A327B05DB80069D821 /* DataStruct */ = {
 			isa = PBXGroup;
 			children = (
-				2A6CFCB2279621C3006CD528 /* User.swift */,
-				2A6CFCB5279621DF006CD528 /* Group.swift */,
+				2A6CFCB2279621C3006CD528 /* Friend.swift */,
+				2A6CFCB5279621DF006CD528 /* Groups.swift */,
 				2A67C68627A729040069D821 /* News.swift */,
+				2AE6827327C3C4C100692AF4 /* Photos.swift */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -163,10 +182,9 @@
 		2A6CFCAF279620B4006CD528 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2AD7E66F27C2D11F00EB47C7 /* Service */,
+				2A026E8D27C17977001FB674 /* NetworkDataStruct */,
 				2A67C6A327B05DB80069D821 /* DataStruct */,
-				2ACBFE3C27B072B1008D068B /* DataSettings.swift */,
-				2A4FB48627BAC0E400C35070 /* Singleton.swift */,
-				2A026E8A27BE80FC001FB674 /* NetworkService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,6 +209,16 @@
 				2A431EAD2783A377004688BC /* Info.plist */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		2AD7E66F27C2D11F00EB47C7 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2A026E8A27BE80FC001FB674 /* NetworkService.swift */,
+				2ACBFE3C27B072B1008D068B /* DataSettings.swift */,
+				2A4FB48627BAC0E400C35070 /* Singleton.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		E4D8A7765B2A5C8B676DA0F8 /* Pods */ = {
@@ -339,14 +367,18 @@
 				2A67C67F27A71D380069D821 /* NewsCollectionViewCell.swift in Sources */,
 				2A6CFCCB27964336006CD528 /* GlobalGroupTableViewController.swift in Sources */,
 				2A026E8B27BE80FC001FB674 /* NetworkService.swift in Sources */,
+				2A026E9827C296F9001FB674 /* DataGroups.swift in Sources */,
+				2AE6827427C3C4C100692AF4 /* Photos.swift in Sources */,
 				2A67C69727ADD03C0069D821 /* GalleryPhotoCustomView.swift in Sources */,
 				2A431EC1278754F7004688BC /* FriendsTableViewController.swift in Sources */,
 				2A6CFCC127962F71006CD528 /* FriendsFotoCollectionViewController.swift in Sources */,
-				2A6CFCB6279621DF006CD528 /* Group.swift in Sources */,
+				2A6CFCB6279621DF006CD528 /* Groups.swift in Sources */,
+				2A026E8F27C17A33001FB674 /* DataFriends.swift in Sources */,
+				2A026E9B27C2972C001FB674 /* DataPhotoFriends.swift in Sources */,
 				2A431EA02783A357004688BC /* AppDelegate.swift in Sources */,
 				2A431EA22783A357004688BC /* SceneDelegate.swift in Sources */,
 				2A431EC4278755C5004688BC /* UserGroupTableViewController.swift in Sources */,
-				2A6CFCB3279621C3006CD528 /* User.swift in Sources */,
+				2A6CFCB3279621C3006CD528 /* Friend.swift in Sources */,
 				2A67C68C27A81C000069D821 /* NewsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

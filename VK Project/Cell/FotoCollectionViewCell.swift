@@ -17,16 +17,24 @@ class FotoCollectionViewCell: UICollectionViewCell {
     
     var savedObject: Any?
     
-    var numberLikes: Int = 0
+    var numberLikes = Int()
     
-    var statusLike = false
+    var statusLike = Bool()
     
     func setup() {
-        likeImage.image = UIImage(systemName: "heart")
         likeImage.tintColor = UIColor.red
         numberLikeLabel.textColor = UIColor.black
         numberLikeLabel.textAlignment = .center
-        numberLikeLabel.font = UIFont(name: "System", size: 20.0)
+        numberLikeLabel.font = UIFont(name: "Rockwell", size: 20.0)
+        
+        if statusLike == true {
+            likeImage.image = UIImage(systemName: "heart.fill")
+            numberLikeLabel.text = String(self.numberLikes)
+            numberLikeLabel.isHidden = false
+        } else {
+            likeImage.image = UIImage(systemName: "heart")
+            numberLikeLabel.isHidden = true
+        }
     }
     
     func clearCell() {
@@ -40,9 +48,11 @@ class FotoCollectionViewCell: UICollectionViewCell {
         clearCell()
     }
 
-    func configure(image: UIImage) {
-        savedObject = image
-        photoImageView.image = image
+    func configure(friendPhoto: Photos) {
+        savedObject = friendPhoto
+        numberLikes = friendPhoto.likesCount
+        statusLike = friendPhoto.userLikeStatus!
+        photoImageView.image = friendPhoto.photo
     }
     
     override func awakeFromNib() {
@@ -81,10 +91,10 @@ class FotoCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func likeButton(_ sender: Any) {
-        if statusLike == false {
-            animateLikeButton()
-        } else {
+        if statusLike == true {
             animateCancelLikeButton()
+        } else {
+            animateLikeButton()
         }
     }
 }

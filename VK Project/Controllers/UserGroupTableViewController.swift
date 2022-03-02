@@ -14,30 +14,39 @@ class UserGroupTableViewController: UITableViewController {
     private let reuseIdentifierUserGroupCell = "UserGroupCell"
     private let segueIdentifierToGlobalGroupController = "segueIdentifierToGlobalGroupController"
     
-    var userGroup = [Group]()
+    private let networking = NetworkService()
+    private var groupItems = [ItemsGroup]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
-    private var resultSearchGroup = [Group]()
+    private var resultSearchGroup = [ItemsGroup]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.clearsSelectionOnViewWillAppear = false
-        
         groupSearchBar.delegate = self
+        
+        networking.fetchUserGroups { [weak self] result in
+            switch result {
+            case .success(let groupItems):
+                self?.groupItems = groupItems
+            case .failure(let error):
+                print(error)
+            }
+        }
         
         self.tableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserGroupCell)
         
         NotificationCenter.default.addObserver(self, selector: #selector(addNewGroup(_:)), name: NSNotification.Name(rawValue: "sendGroup"), object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        resultSearchGroup = userGroup
-        self.tableView.reloadData()
-    }
-    
-    func isContainInArray(group: Group) -> Bool {
-        if userGroup.contains(where: { itemGroup in itemGroup.name == group.name}) {
+    private func isContainInArray(group: ItemsGroup) -> Bool {
+        if groupItems.contains(where: { itemGroup in itemGroup.name == group.name}) {
             return true
         }
         return false
@@ -45,12 +54,12 @@ class UserGroupTableViewController: UITableViewController {
     
     @objc func addNewGroup(_ notification: Notification) {
         
-        guard let newGroup = notification.object as? Group else {return}
+        guard let newGroup = notification.object as? ItemsGroup else {return}
         
         if isContainInArray(group: newGroup) {
             return
         }
-        userGroup.append(newGroup)
+        groupItems.append(newGroup)
         self.tableView.reloadData()
     }
     
@@ -61,6 +70,9 @@ class UserGroupTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if resultSearchGroup.isEmpty {
+            return groupItems.count
+        }
         return resultSearchGroup.count
     }
     
@@ -68,19 +80,18 @@ class UserGroupTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUserGroupCell, for: indexPath)
                 as? UniversalCell else { return UITableViewCell() }
         
-        cell.configure(group: resultSearchGroup[indexPath.row])
+        if resultSearchGroup.isEmpty,
+           let itemsGroup = Groups(itemsGroup: groupItems[indexPath.row]) {
+            cell.configure(group: itemsGroup)
+        } else if let itemsGroup = Groups(itemsGroup: resultSearchGroup[indexPath.row]) {
+            cell.configure(group: itemsGroup)
+        }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        userGroup.remove(at: indexPath.row)
-        resultSearchGroup.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        return false
     }
     
     // MARK: - Table view Delegate
@@ -102,9 +113,9 @@ extension UserGroupTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            resultSearchGroup = userGroup
+            resultSearchGroup = groupItems
         } else {
-            resultSearchGroup = userGroup.filter({ item in
+            resultSearchGroup = groupItems.filter({ item in
                 item.name.lowercased().contains(searchText.lowercased())
             })
         }
@@ -116,7 +127,7 @@ extension UserGroupTableViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        resultSearchGroup = userGroup
+        resultSearchGroup = groupItems
     }
     
 }
