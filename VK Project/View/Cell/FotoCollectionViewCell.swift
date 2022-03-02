@@ -16,26 +16,8 @@ class FotoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var numberLikeLabel: UILabel!
     
     var savedObject: Any?
-    
     private var numberLikes = Int()
-    
     private var statusLike = Bool()
-    
-    private func setup() {
-        likeImage.tintColor = UIColor.red
-        numberLikeLabel.textColor = UIColor.black
-        numberLikeLabel.textAlignment = .center
-        numberLikeLabel.font = UIFont(name: "Rockwell", size: 20.0)
-        
-        if statusLike == true {
-            likeImage.image = UIImage(systemName: "heart.fill")
-            numberLikeLabel.text = String(self.numberLikes)
-            numberLikeLabel.isHidden = false
-        } else {
-            likeImage.image = UIImage(systemName: "heart")
-            numberLikeLabel.isHidden = true
-        }
-    }
     
     private func clearCell() {
         savedObject = nil
@@ -47,18 +29,45 @@ class FotoCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         clearCell()
     }
-
-    func configure(friendPhoto: Photos) {
+    
+    func configure(friendPhoto: RealmPhoto) {
         savedObject = friendPhoto
         numberLikes = friendPhoto.likesCount
-        statusLike = friendPhoto.userLikeStatus!
+        statusLike = friendPhoto.likeStatus
         photoImageView.image = friendPhoto.photo
+        setupLike()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
         clearCell()
+    }
+    
+    private func setup() {
+        likeImage.tintColor = UIColor.red
+        numberLikeLabel.textColor = UIColor.black
+        numberLikeLabel.textAlignment = .center
+        numberLikeLabel.font = UIFont(name: "Rockwell", size: 20.0)
+    }
+    
+    private func setupLike() {
+        if statusLike == true {
+            likeImage.image = UIImage(systemName: "heart.fill")
+            numberLikeLabel.text = String(self.numberLikes)
+            numberLikeLabel.isHidden = false
+        } else {
+            likeImage.image = UIImage(systemName: "heart")
+            numberLikeLabel.isHidden = true
+        }
+    }
+    
+    @IBAction func likeButton(_ sender: Any) {
+        if statusLike == true {
+            animateCancelLikeButton()
+        } else {
+            animateLikeButton()
+        }
     }
     
     private func animateLikeButton() {
@@ -88,13 +97,5 @@ class FotoCollectionViewCell: UICollectionViewCell {
                             self.numberLikes -= 1
                             self.statusLike = false
                           })
-    }
-    
-    @IBAction func likeButton(_ sender: Any) {
-        if statusLike == true {
-            animateCancelLikeButton()
-        } else {
-            animateLikeButton()
-        }
     }
 }

@@ -47,13 +47,19 @@ class UniversalCell: UITableViewCell {
         clearCell()
         }
     
-    func configure(user: Friend) {
-        savedObject = user
-        userLabel.text = user.fullName
-        userImage.image = user.avatar
+    func configure(friend: RealmFriends) {
+        savedObject = friend
+        userLabel.text = friend.fullName
+        userImage.image = friend.avatar
     }
     
     func configure(group: Groups) {
+        savedObject = group
+        userLabel.text = group.name
+        userImage.image = group.avatar
+    }
+    
+    func configure(group: RealmGroups) {
         savedObject = group
         userLabel.text = group.name
         userImage.image = group.avatar

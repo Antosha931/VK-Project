@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,12 +37,17 @@
 		2A6CFCC627963DA6006CD528 /* FotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CFCC427963DA6006CD528 /* FotoCollectionViewCell.swift */; };
 		2A6CFCC727963DA6006CD528 /* FotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A6CFCC527963DA6006CD528 /* FotoCollectionViewCell.xib */; };
 		2A6CFCCB27964336006CD528 /* GlobalGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6CFCCA27964336006CD528 /* GlobalGroupTableViewController.swift */; };
+		2AB7D0C727CD4DD700167643 /* RealmFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7D0C627CD4DD700167643 /* RealmFriends.swift */; };
 		2ACFF0DC27C6ED570051821F /* VKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACFF0DB27C6ED570051821F /* VKResponse.swift */; };
+		2AE4F42F27CE2EAB007929EF /* RealmGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4F42E27CE2EAB007929EF /* RealmGroups.swift */; };
+		2AE4F43227CE5061007929EF /* RealmPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4F43127CE5061007929EF /* RealmPhoto.swift */; };
 		2AE6827427C3C4C100692AF4 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE6827327C3C4C100692AF4 /* Photos.swift */; };
-		6376A59432C4798CFE2BBC23 /* Pods_VK_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C596BDA5E6B1FEB53BB8A751 /* Pods_VK_Project.framework */; };
+		2AF48C7D27C97FF8003B8730 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF48C7C27C97FF8003B8730 /* RealmService.swift */; };
+		91E9166EDCB9C520AC3C087B /* libPods-VK Project.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 482A70F4CD97F9A76F6D10E1 /* libPods-VK Project.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		213CB43648AF36873F792F6B /* Pods-VK Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK Project.debug.xcconfig"; path = "Target Support Files/Pods-VK Project/Pods-VK Project.debug.xcconfig"; sourceTree = "<group>"; };
 		2A026E8727BE801B001FB674 /* LoginWebKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebKitViewController.swift; sourceTree = "<group>"; };
 		2A026E8A27BE80FC001FB674 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2A026E8E27C17A33001FB674 /* DataFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFriends.swift; sourceTree = "<group>"; };
@@ -75,11 +80,14 @@
 		2A6CFCC427963DA6006CD528 /* FotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FotoCollectionViewCell.swift; path = "VK Project/View/Cell/FotoCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		2A6CFCC527963DA6006CD528 /* FotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FotoCollectionViewCell.xib; path = "VK Project/View/Cell/FotoCollectionViewCell.xib"; sourceTree = SOURCE_ROOT; };
 		2A6CFCCA27964336006CD528 /* GlobalGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalGroupTableViewController.swift; sourceTree = "<group>"; };
+		2AB7D0C627CD4DD700167643 /* RealmFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmFriends.swift; sourceTree = "<group>"; };
 		2ACFF0DB27C6ED570051821F /* VKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKResponse.swift; sourceTree = "<group>"; };
+		2AE4F42E27CE2EAB007929EF /* RealmGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmGroups.swift; sourceTree = "<group>"; };
+		2AE4F43127CE5061007929EF /* RealmPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPhoto.swift; sourceTree = "<group>"; };
 		2AE6827327C3C4C100692AF4 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
-		9824B5BA533D5CC660E3A9F9 /* Pods-VK Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK Project.debug.xcconfig"; path = "Target Support Files/Pods-VK Project/Pods-VK Project.debug.xcconfig"; sourceTree = "<group>"; };
-		B641E07506A8E5D4BAA9CBD7 /* Pods-VK Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK Project.release.xcconfig"; path = "Target Support Files/Pods-VK Project/Pods-VK Project.release.xcconfig"; sourceTree = "<group>"; };
-		C596BDA5E6B1FEB53BB8A751 /* Pods_VK_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VK_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AF48C7C27C97FF8003B8730 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		3031C128CE1622B3504B98F1 /* Pods-VK Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK Project.release.xcconfig"; path = "Target Support Files/Pods-VK Project/Pods-VK Project.release.xcconfig"; sourceTree = "<group>"; };
+		482A70F4CD97F9A76F6D10E1 /* libPods-VK Project.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VK Project.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6376A59432C4798CFE2BBC23 /* Pods_VK_Project.framework in Frameworks */,
+				91E9166EDCB9C520AC3C087B /* libPods-VK Project.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,8 +126,8 @@
 			children = (
 				2A431E9E2783A356004688BC /* VK Project */,
 				2A431E9D2783A356004688BC /* Products */,
-				E4D8A7765B2A5C8B676DA0F8 /* Pods */,
-				EB4D3C0431AF9AB5C32937EF /* Frameworks */,
+				E568A27B1E44FD56825CBD45 /* Pods */,
+				C98B64FCF2FB25403A981BA1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -195,6 +203,8 @@
 		2A6CFCAF279620B4006CD528 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2AF48C7B27C97FD0003B8730 /* Service */,
+				2AB7D0C527CD4D7000167643 /* RealmData */,
 				2A67C6A327B05DB80069D821 /* DataStruct */,
 			);
 			path = Model;
@@ -211,6 +221,16 @@
 				2A67C67E27A71D380069D821 /* NewsCollectionViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		2AB7D0C527CD4D7000167643 /* RealmData */ = {
+			isa = PBXGroup;
+			children = (
+				2AB7D0C627CD4DD700167643 /* RealmFriends.swift */,
+				2AE4F42E27CE2EAB007929EF /* RealmGroups.swift */,
+				2AE4F43127CE5061007929EF /* RealmPhoto.swift */,
+			);
+			path = RealmData;
 			sourceTree = "<group>";
 		};
 		2ABC92BC27C562F200935201 /* Networking */ = {
@@ -234,27 +254,35 @@
 		2AD7E66F27C2D11F00EB47C7 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				2A026E8A27BE80FC001FB674 /* NetworkService.swift */,
 				2A4FB48627BAC0E400C35070 /* Singleton.swift */,
+				2A026E8A27BE80FC001FB674 /* NetworkService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
 		};
-		E4D8A7765B2A5C8B676DA0F8 /* Pods */ = {
+		2AF48C7B27C97FD0003B8730 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				9824B5BA533D5CC660E3A9F9 /* Pods-VK Project.debug.xcconfig */,
-				B641E07506A8E5D4BAA9CBD7 /* Pods-VK Project.release.xcconfig */,
+				2AF48C7C27C97FF8003B8730 /* RealmService.swift */,
 			);
-			path = Pods;
+			path = Service;
 			sourceTree = "<group>";
 		};
-		EB4D3C0431AF9AB5C32937EF /* Frameworks */ = {
+		C98B64FCF2FB25403A981BA1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C596BDA5E6B1FEB53BB8A751 /* Pods_VK_Project.framework */,
+				482A70F4CD97F9A76F6D10E1 /* libPods-VK Project.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E568A27B1E44FD56825CBD45 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				213CB43648AF36873F792F6B /* Pods-VK Project.debug.xcconfig */,
+				3031C128CE1622B3504B98F1 /* Pods-VK Project.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,11 +292,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A431EB02783A377004688BC /* Build configuration list for PBXNativeTarget "VK Project" */;
 			buildPhases = (
-				9C935F7FBE9E71F38435DD1C /* [CP] Check Pods Manifest.lock */,
+				B089B220E426F1F79B4259AF /* [CP] Check Pods Manifest.lock */,
 				2A431E982783A356004688BC /* Sources */,
 				2A431E992783A356004688BC /* Frameworks */,
 				2A431E9A2783A356004688BC /* Resources */,
-				172F5A5C9DE7CC9A6E934649 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -329,24 +356,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		172F5A5C9DE7CC9A6E934649 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VK Project/Pods-VK Project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VK Project/Pods-VK Project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VK Project/Pods-VK Project-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9C935F7FBE9E71F38435DD1C /* [CP] Check Pods Manifest.lock */ = {
+		B089B220E426F1F79B4259AF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -379,11 +389,14 @@
 				2A67C69F27ADD4BA0069D821 /* GalleryPhotoViewController.swift in Sources */,
 				2A6CFCBA2796279C006CD528 /* UniversalCell.swift in Sources */,
 				2A026E8827BE801B001FB674 /* LoginWebKitViewController.swift in Sources */,
+				2AB7D0C727CD4DD700167643 /* RealmFriends.swift in Sources */,
 				2A6CFCC627963DA6006CD528 /* FotoCollectionViewCell.swift in Sources */,
 				2A431EA42783A357004688BC /* LoginViewController.swift in Sources */,
+				2AE4F43227CE5061007929EF /* RealmPhoto.swift in Sources */,
 				2A67C68727A729040069D821 /* News.swift in Sources */,
 				2ACFF0DC27C6ED570051821F /* VKResponse.swift in Sources */,
 				2A67C67F27A71D380069D821 /* NewsCollectionViewCell.swift in Sources */,
+				2AF48C7D27C97FF8003B8730 /* RealmService.swift in Sources */,
 				2A6CFCCB27964336006CD528 /* GlobalGroupTableViewController.swift in Sources */,
 				2A026E8B27BE80FC001FB674 /* NetworkService.swift in Sources */,
 				2A060DDB27C5812B00707CEA /* PhotoProcessing.swift in Sources */,
@@ -394,6 +407,7 @@
 				2A6CFCC127962F71006CD528 /* FriendsFotoCollectionViewController.swift in Sources */,
 				2A6CFCB6279621DF006CD528 /* Groups.swift in Sources */,
 				2A026E8F27C17A33001FB674 /* DataFriends.swift in Sources */,
+				2AE4F42F27CE2EAB007929EF /* RealmGroups.swift in Sources */,
 				2A026E9B27C2972C001FB674 /* DataPhotoFriend.swift in Sources */,
 				2A431EA02783A357004688BC /* AppDelegate.swift in Sources */,
 				2A431EA22783A357004688BC /* SceneDelegate.swift in Sources */,
@@ -543,7 +557,7 @@
 		};
 		2A431EB12783A377004688BC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9824B5BA533D5CC660E3A9F9 /* Pods-VK Project.debug.xcconfig */;
+			baseConfigurationReference = 213CB43648AF36873F792F6B /* Pods-VK Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -563,7 +577,7 @@
 		};
 		2A431EB22783A377004688BC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B641E07506A8E5D4BAA9CBD7 /* Pods-VK Project.release.xcconfig */;
+			baseConfigurationReference = 3031C128CE1622B3504B98F1 /* Pods-VK Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
