@@ -13,7 +13,7 @@ struct Groups {
     let name: String
     var avatar: UIImage?
     
-    init?(itemsGroup: ItemsGroup) {
+    init(itemsGroup: ItemsGroup) {
         self.groupId = itemsGroup.id
         self.name = itemsGroup.name
         self.avatar = PhotoProcessing().downloadPhoto(urlString: itemsGroup.avatarPhoto)
