@@ -47,9 +47,9 @@ class GlobalGroupTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierGlobalGroupCell, for: indexPath)
                 as? UniversalCell else { return UITableViewCell() }
         
-        if let itemsGlobalGroup = Groups(itemsGroup: resultSearchGrlobalGroup[indexPath.row]) {
-            cell.configure(group: itemsGlobalGroup)
-        }
+//        if let itemsGroup = Groups(itemsGroup: resultSearchGrlobalGroup[indexPath.row]) {
+            cell.configure(group: Groups(itemsGroup: resultSearchGrlobalGroup[indexPath.row]))
+//        }
         
         return cell
     }
