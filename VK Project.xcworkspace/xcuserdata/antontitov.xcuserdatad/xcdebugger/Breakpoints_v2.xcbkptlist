@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4E72C121-8F8A-4DA5-9962-13D76747F94E"
-            shouldBeEnabled = "No"
+            uuid = "73D76D56-DE4B-45C8-8B55-BECF55F800F0"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VK Project/Controllers/UserGroupTableViewController.swift"
+            filePath = "VK Project/Controllers/FriendsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "groupSorting()"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "viewDidDisappear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

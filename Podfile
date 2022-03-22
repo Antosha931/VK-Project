@@ -4,6 +4,6 @@
 target 'VK Project' do
 
 	use_modular_headers!
-	pod 'RealmSwift'	
 
+	pod 'RealmSwift'
 end
