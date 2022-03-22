@@ -6,16 +6,18 @@
 //
 
 import UIKit
+import RealmSwift
 
 class UserGroupTableViewController: UITableViewController {
     
-    private let groupSearchBar = UISearchBar()
+    private var groupSearchBar = UISearchBar()
     
     private let reuseIdentifierUserGroupCell = "UserGroupCell"
     private let segueIdentifierToGlobalGroupController = "segueIdentifierToGlobalGroupController"
     
     private let networking = NetworkService()
-    private var groupItems = [ItemsGroup]() {
+    private var realmGroups: Results<RealmGroups>?
+    private var groupItems = [RealmGroups]() {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -23,7 +25,26 @@ class UserGroupTableViewController: UITableViewController {
         }
     }
     
-    private var resultSearchGroup = [ItemsGroup]()
+    private var resultSearchGroup = [RealmGroups]()
+    
+    private func reloadGroups() {
+        realmGroups = try? RealmService.load(typeOf: RealmGroups.self)
+        
+        groupItems = groupSorting()
+        
+        self.tableView.reloadData()
+    }
+    
+    private func groupSorting() -> [RealmGroups] {
+        var lettersOfName: [RealmGroups] = []
+        guard let groups = realmGroups else { return lettersOfName }
+        for item in groups {
+            if !lettersOfName.contains(item) {
+                lettersOfName.append(item)
+            }
+        }
+        return lettersOfName
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +55,15 @@ class UserGroupTableViewController: UITableViewController {
         networking.fetchUserGroups { [weak self] result in
             switch result {
             case .success(let groupItems):
-                self?.groupItems = groupItems
+                let realmGroup = groupItems.map { RealmGroups(itemsGroup: $0) }
+                DispatchQueue.main.async {
+                    do {
+                        try RealmService.save(items: realmGroup)
+                        self?.reloadGroups()
+                    } catch {
+                        print(error)
+                    }
+                }
             case .failure(let error):
                 print(error)
             }
@@ -42,26 +71,26 @@ class UserGroupTableViewController: UITableViewController {
         
         self.tableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserGroupCell)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(addNewGroup(_:)), name: NSNotification.Name(rawValue: "sendGroup"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(addNewGroup(_:)), name: NSNotification.Name(rawValue: "sendGroup"), object: nil)
     }
     
-    private func isContainInArray(group: ItemsGroup) -> Bool {
-        if groupItems.contains(where: { itemGroup in itemGroup.name == group.name}) {
-            return true
-        }
-        return false
-    }
-    
-    @objc func addNewGroup(_ notification: Notification) {
-        
-        guard let newGroup = notification.object as? ItemsGroup else {return}
-        
-        if isContainInArray(group: newGroup) {
-            return
-        }
-        groupItems.append(newGroup)
-        self.tableView.reloadData()
-    }
+//    private func isContainInArray(group: ItemsGroup) -> Bool {
+//        if groupItems.contains(where: { itemGroup in itemGroup.name == group.name}) {
+//            return true
+//        }
+//        return false
+//    }
+//
+//    @objc func addNewGroup(_ notification: Notification) {
+//
+//        guard let newGroup = notification.object as? ItemsGroup else {return}
+//
+//        if isContainInArray(group: newGroup) {
+//            return
+//        }
+//        groupItems.append(newGroup)
+//        self.tableView.reloadData()
+//    }
     
     // MARK: - Table view data source
     
@@ -80,11 +109,10 @@ class UserGroupTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUserGroupCell, for: indexPath)
                 as? UniversalCell else { return UITableViewCell() }
         
-        if resultSearchGroup.isEmpty,
-           let itemsGroup = Groups(itemsGroup: groupItems[indexPath.row]) {
-            cell.configure(group: itemsGroup)
-        } else if let itemsGroup = Groups(itemsGroup: resultSearchGroup[indexPath.row]) {
-            cell.configure(group: itemsGroup)
+        if resultSearchGroup.isEmpty {
+            cell.configure(group: groupItems[indexPath.row])
+        } else {
+            cell.configure(group: resultSearchGroup[indexPath.row])
         }
         
         return cell
@@ -125,9 +153,4 @@ extension UserGroupTableViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.tableView.endEditing(true)
     }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        resultSearchGroup = groupItems
-    }
-    
 }

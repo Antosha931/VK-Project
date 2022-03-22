@@ -13,11 +13,12 @@ class GalleryPhotoViewController: UIViewController {
     @IBOutlet weak var galleryView: GalleryPhotoCustomView!
     
     var photoArray = [UIImage]()
+    var photoIndex = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         backView.backgroundColor = UIColor.lightGray
-        galleryView.setImages(images: photoArray)
+        galleryView.setImages(images: photoArray, index: photoIndex)
     }
 }

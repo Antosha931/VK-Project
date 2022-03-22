@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
     
@@ -16,26 +17,19 @@ class FriendsTableViewController: UITableViewController {
         }
     }
     
-    var savedObject: Any?
-    
-    private let dataSetingsUser = DataSettings()
-    private let networking = NetworkService()
-    private var friendsItems = [ItemsFriend]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.friendsTableView.reloadData()
-            }
-        }
-    }
-    
     private let reuseIdentifierUserTableCell = "UserCell"
     private let segueIdentifierToFotoController = "segueIdentifierToFotoController"
     
-    private func sortingUserNames() -> [String] {
+    var savedObject: Any?
+    
+    private let networking = NetworkService()
+    private var realmFriend: Results<RealmFriends>?
+    
+    private func sortingFriendsNames() -> [String] {
         var lettersArray: [String] = []
-        
-        for user in friendsItems {
-            let letter = String(user.lastName.prefix(1))
+        guard let friends = realmFriend else { return lettersArray }
+        for friend in friends {
+            let letter = String(friend.lastName.prefix(1))
             if !lettersArray.contains(letter) {
                 lettersArray.append(letter)
             }
@@ -46,10 +40,10 @@ class FriendsTableViewController: UITableViewController {
         return sortiredNames
     }
     
-    private func filterByAlphabet(lettersArray: String) -> [ItemsFriend] {
-        var lettersOfName: [ItemsFriend] = []
-        
-        for item in friendsItems {
+    private func filterByAlphabet(lettersArray: String) -> [RealmFriends] {
+        var lettersOfName: [RealmFriends] = []
+        guard let friends = realmFriend else { return lettersOfName }
+        for item in friends {
             let nameLetter = String(item.lastName.prefix(1))
             if nameLetter == lettersArray {
                 lettersOfName.append(item)
@@ -58,13 +52,33 @@ class FriendsTableViewController: UITableViewController {
         return lettersOfName
     }
     
+    private func reloadDataFriends() {
+        realmFriend = try? RealmService.load(typeOf: RealmFriends.self)
+        
+        friendsTableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.clearsSelectionOnViewWillAppear = false
+                
+        friendsTableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserTableCell)
+        
+        reloadDataFriends()
         
         networking.fetchUserFriends { [weak self] result in
             switch result {
             case .success(let friends):
-                self?.friendsItems = friends
+                let realmFriend = friends.map { RealmFriends(itemsFriend: $0) }
+                DispatchQueue.main.async {
+                    do {
+                        try RealmService.save(items: realmFriend)
+                        self?.reloadDataFriends()
+                    } catch {
+                        print(error)
+                    }
+                }
             case .failure(let error):
                 print(error)
             }
@@ -78,22 +92,20 @@ class FriendsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return sortingUserNames().count
+        return sortingFriendsNames().count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filterByAlphabet(lettersArray: sortingUserNames()[section]).count
+        return filterByAlphabet(lettersArray: sortingFriendsNames()[section]).count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUserTableCell, for: indexPath)
                 as? UniversalCell else { return UITableViewCell() }
         
-        let arrayLetter = filterByAlphabet(lettersArray: sortingUserNames()[indexPath.section])
-        
-        if let friendsItems = Friend(friendsItems: arrayLetter[indexPath.row]) {
-            cell.configure(user: friendsItems)
-        }
+        let arrayLetter = filterByAlphabet(lettersArray: sortingFriendsNames()[indexPath.section])
+
+        cell.configure(friend: arrayLetter[indexPath.row])
         
         return cell
     }
@@ -106,7 +118,7 @@ class FriendsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
            guard let cell = tableView.cellForRow(at: indexPath) as? UniversalCell,
-                 let cellObject = cell.savedObject as? Friend else { return }
+                 let cellObject = cell.savedObject as? RealmFriends else { return }
            performSegue(withIdentifier: segueIdentifierToFotoController, sender: cellObject)
        }
     
@@ -115,7 +127,7 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sortingUserNames()[section].uppercased()
+        return sortingFriendsNames()[section].uppercased()
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -127,7 +139,7 @@ class FriendsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifierToFotoController,
            let dst = segue.destination as? FriendsFotoCollectionViewController,
-           let friend = sender as? Friend {
+           let friend = sender as? RealmFriends {
             dst.friendId = friend.friendId
         }
     }
