@@ -17,6 +17,7 @@ class UserGroupTableViewController: UITableViewController {
     
     private let networking = NetworkService()
     private var realmGroups: Results<RealmGroups>?
+    private var groupsToken: NotificationToken?
     private var groupItems = [RealmGroups]() {
         didSet {
             DispatchQueue.main.async {
@@ -72,6 +73,29 @@ class UserGroupTableViewController: UITableViewController {
         self.tableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserGroupCell)
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(addNewGroup(_:)), name: NSNotification.Name(rawValue: "sendGroup"), object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        groupsToken = realmGroups?.observe { [weak self] changes in
+            guard let self = self else { return }
+            switch changes {
+            case .initial(_):
+                self.tableView.reloadData()
+            case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                print(deletions, insertions, modifications)
+                self.tableView.reloadData()
+            case .error(let error):
+                print(error)
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        groupsToken?.invalidate()
     }
     
 //    private func isContainInArray(group: ItemsGroup) -> Bool {

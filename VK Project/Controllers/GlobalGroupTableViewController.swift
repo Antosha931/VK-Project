@@ -6,16 +6,19 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class GlobalGroupTableViewController: UITableViewController {
     
-    private let globalGroupSearchBar = UISearchBar()
-    
     private let reuseIdentifierGlobalGroupCell = "GlobalGroupCell"
-    
-    var globalGroup = [ItemsGroup]()
-    
+    private let globalGroupSearchBar = UISearchBar()
     private let networking = NetworkService()
+    private let ref = Database.database().reference(withPath: "groups")
+
+    private var timer = Timer()
+    private var searchString = String()
+    private var groups = [FirebaseGroup]()
+    private var globalGroup = [ItemsGroup]()
     private var resultSearchGrlobalGroup = [ItemsGroup]() {
         didSet {
             DispatchQueue.main.async {
@@ -24,10 +27,20 @@ class GlobalGroupTableViewController: UITableViewController {
         }
     }
     
-    private var searchString = String()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref.observe(.value, with: { snapshot in
+            var groups: [FirebaseGroup] = []
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                   let group = FirebaseGroup(snapshot: snapshot) {
+                    groups.append(group)
+                }
+            }
+            self.groups = groups
+            self.tableView.reloadData()
+        })
         
         self.globalGroupSearchBar.delegate = self
         self.tableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierGlobalGroupCell)
@@ -47,9 +60,7 @@ class GlobalGroupTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierGlobalGroupCell, for: indexPath)
                 as? UniversalCell else { return UITableViewCell() }
         
-        if let itemsGlobalGroup = Groups(itemsGroup: resultSearchGrlobalGroup[indexPath.row]) {
-            cell.configure(group: itemsGlobalGroup)
-        }
+            cell.configure(group: Groups(itemsGroup: resultSearchGrlobalGroup[indexPath.row]))
         
         return cell
     }
@@ -80,6 +91,11 @@ extension GlobalGroupTableViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        timer.invalidate()
+        timer = Timer.init(timeInterval: 2, repeats: false, block: { _ in
+            print(searchText)
+        })
+        
         if searchText.isEmpty {
             resultSearchGrlobalGroup = globalGroup
         } else {

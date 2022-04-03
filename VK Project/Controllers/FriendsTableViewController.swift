@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseAuth
 
 class FriendsTableViewController: UITableViewController {
     
@@ -24,6 +25,7 @@ class FriendsTableViewController: UITableViewController {
     
     private let networking = NetworkService()
     private var realmFriend: Results<RealmFriends>?
+    private var friendsToken: NotificationToken?
     
     private func sortingFriendsNames() -> [String] {
         var lettersArray: [String] = []
@@ -89,6 +91,28 @@ class FriendsTableViewController: UITableViewController {
         friendsTableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserTableCell)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        friendsToken = realmFriend?.observe { [weak self] changes in
+            switch changes {
+            case .initial(_):
+                self?.friendsTableView.reloadData()
+            case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                print(deletions, insertions, modifications)
+                self?.friendsTableView.reloadData()
+            case .error(let error):
+                print(error)
+            }
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        friendsToken?.invalidate()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -142,6 +166,16 @@ class FriendsTableViewController: UITableViewController {
            let friend = sender as? RealmFriends {
             dst.friendId = friend.friendId
         }
+    }
+    
+    @IBAction func exitButton(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") else { return }
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: true, completion: nil)
+        } catch (let error) {
+            print("Auth sign out failed: \(error)") }
     }
 }
  
