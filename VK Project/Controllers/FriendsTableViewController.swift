@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseAuth
 
 class FriendsTableViewController: UITableViewController {
     
@@ -165,6 +166,16 @@ class FriendsTableViewController: UITableViewController {
            let friend = sender as? RealmFriends {
             dst.friendId = friend.friendId
         }
+    }
+    
+    @IBAction func exitButton(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") else { return }
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: true, completion: nil)
+        } catch (let error) {
+            print("Auth sign out failed: \(error)") }
     }
 }
  

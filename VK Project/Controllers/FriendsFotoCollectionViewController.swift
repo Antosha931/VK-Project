@@ -74,11 +74,8 @@ class FriendsFotoCollectionViewController: UICollectionViewController {
             case .initial(_):
                 self?.collectionView.reloadData()
             case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
-                self?.collectionView.isEditing = true
-                self?.collectionView.insertItems(at: deletions.map( {IndexPath(item: $0, section: 0)} ))
-                self?.collectionView.insertItems(at: insertions.map( {IndexPath(item: $0, section: 0)} ))
-                self?.collectionView.insertItems(at: modifications.map( {IndexPath(item: $0, section: 0)} ))
-                self?.collectionView.endEditing(true)
+                self?.collectionView.reloadData()
+                print(deletions, insertions, modifications)
             case .error(let error):
                 print(error)
             }
