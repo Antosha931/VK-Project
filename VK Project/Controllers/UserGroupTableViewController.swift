@@ -84,11 +84,7 @@ class UserGroupTableViewController: UITableViewController {
                 self?.tableView.reloadData()
             case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
                 print(deletions, insertions, modifications)
-                self?.tableView.beginUpdates()
-                self?.tableView.insertRows(at: deletions.map( {IndexPath(row: $0, section: 0)} ), with: .automatic)
-                self?.tableView.insertRows(at: insertions.map( {IndexPath(row: $0, section: 0)} ), with: .automatic)
-                self?.tableView.insertRows(at: modifications.map( {IndexPath(row: $0, section: 0)} ), with: .automatic)
-                self?.tableView.endUpdates()
+                self?.tableView.reloadData()
             case .error(let error):
                 print(error)
             }

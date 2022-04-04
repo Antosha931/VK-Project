@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="159" id="KGk-i7-Jjw" customClass="AuthorNewsTableViewCell" customModule="VK_Project" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="458" height="159"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="458" height="159"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7OC-H6-RSa">
+                        <rect key="frame" x="0.0" y="0.0" width="458" height="159"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mmJ-ia-Uvz">
+                                <rect key="frame" x="10" y="10" width="139" height="139"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mmJ-ia-Uvz" secondAttribute="height" multiplier="1:1" id="NNN-6X-ZJd"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Имя группы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFO-2K-ocQ">
+                                <rect key="frame" x="169" y="59" width="117" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Время поста" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X02-e8-8zg">
+                                <rect key="frame" x="169" y="80.5" width="80.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mmJ-ia-Uvz" firstAttribute="leading" secondItem="7OC-H6-RSa" secondAttribute="leading" constant="10" id="6zb-2t-dMY"/>
+                            <constraint firstItem="LFO-2K-ocQ" firstAttribute="leading" secondItem="mmJ-ia-Uvz" secondAttribute="trailing" constant="20" id="I6b-9k-ndo"/>
+                            <constraint firstItem="X02-e8-8zg" firstAttribute="top" secondItem="LFO-2K-ocQ" secondAttribute="bottom" id="SjJ-dt-QFT"/>
+                            <constraint firstItem="LFO-2K-ocQ" firstAttribute="centerY" secondItem="7OC-H6-RSa" secondAttribute="centerY" constant="-10" id="VCo-gP-mSh"/>
+                            <constraint firstAttribute="bottom" secondItem="mmJ-ia-Uvz" secondAttribute="bottom" constant="10" id="e0h-v6-bgQ"/>
+                            <constraint firstItem="mmJ-ia-Uvz" firstAttribute="top" secondItem="7OC-H6-RSa" secondAttribute="top" constant="10" id="eAd-T6-i0h"/>
+                            <constraint firstItem="X02-e8-8zg" firstAttribute="leading" secondItem="mmJ-ia-Uvz" secondAttribute="trailing" constant="20" id="gCp-zL-lhk"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="7OC-H6-RSa" secondAttribute="bottom" id="LUN-IV-Dok"/>
+                    <constraint firstItem="7OC-H6-RSa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="OLW-uS-OhJ"/>
+                    <constraint firstAttribute="trailing" secondItem="7OC-H6-RSa" secondAttribute="trailing" id="T7h-2K-cAb"/>
+                    <constraint firstItem="7OC-H6-RSa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="h2z-08-wJe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="avatarAuthorNewsImage" destination="mmJ-ia-Uvz" id="hYz-YK-jxw"/>
+                <outlet property="backVew" destination="7OC-H6-RSa" id="q3k-Vj-74l"/>
+                <outlet property="dateNewsLabel" destination="X02-e8-8zg" id="Nv4-3M-tRj"/>
+                <outlet property="nameAuthorNewsLabel" destination="LFO-2K-ocQ" id="srM-tR-Vre"/>
+            </connections>
+            <point key="canvasLocation" x="240.57971014492756" y="114.17410714285714"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
