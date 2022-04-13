@@ -19,6 +19,7 @@ class FriendsFotoCollectionViewController: UICollectionViewController {
     private let networking = NetworkService()
     private var realmPhoto: Results<RealmPhoto>?
     private var photoFriend = [RealmPhoto]()
+    private var photoToken: NotificationToken?
     
     private var photoArray = [UIImage]()
     
@@ -63,6 +64,31 @@ class FriendsFotoCollectionViewController: UICollectionViewController {
         })
         
         self.collectionView.register(UINib(nibName: "FotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        photoToken = realmPhoto?.observe { [weak self] changes in
+            switch changes {
+            case .initial(_):
+                self?.collectionView.reloadData()
+            case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                self?.collectionView.isEditing = true
+                self?.collectionView.insertItems(at: deletions.map( {IndexPath(item: $0, section: 0)} ))
+                self?.collectionView.insertItems(at: insertions.map( {IndexPath(item: $0, section: 0)} ))
+                self?.collectionView.insertItems(at: modifications.map( {IndexPath(item: $0, section: 0)} ))
+                self?.collectionView.endEditing(true)
+            case .error(let error):
+                print(error)
+            }
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        photoToken?.invalidate()
     }
     
     // MARK: UICollectionViewDataSource

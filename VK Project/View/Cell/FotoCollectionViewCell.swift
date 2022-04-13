@@ -16,6 +16,7 @@ class FotoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var numberLikeLabel: UILabel!
     
     var savedObject: Any?
+    
     private var numberLikes = Int()
     private var statusLike = Bool()
     
