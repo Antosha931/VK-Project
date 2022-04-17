@@ -8,15 +8,15 @@
 import UIKit
 import RealmSwift
 
-class UserGroupTableViewController: UITableViewController {
-    
-    private var groupSearchBar = UISearchBar()
+final class UserGroupTableViewController: UITableViewController {
     
     private let reuseIdentifierUserGroupCell = "UserGroupCell"
     private let segueIdentifierToGlobalGroupController = "segueIdentifierToGlobalGroupController"
     
+    private var groupSearchBar = UISearchBar()
     private let networking = NetworkService()
     private var realmGroups: Results<RealmGroups>?
+    private var resultSearchGroup = [RealmGroups]()
     private var groupsToken: NotificationToken?
     private var groupItems = [RealmGroups]() {
         didSet {
@@ -26,14 +26,12 @@ class UserGroupTableViewController: UITableViewController {
         }
     }
     
-    private var resultSearchGroup = [RealmGroups]()
-    
     private func reloadGroups() {
         realmGroups = try? RealmService.load(typeOf: RealmGroups.self)
         
         groupItems = groupSorting()
         
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
     
     private func groupSorting() -> [RealmGroups] {
@@ -53,20 +51,23 @@ class UserGroupTableViewController: UITableViewController {
         self.clearsSelectionOnViewWillAppear = false
         groupSearchBar.delegate = self
         
-        networking.fetchUserGroups { [weak self] result in
-            switch result {
-            case .success(let groupItems):
-                let realmGroup = groupItems.map { RealmGroups(itemsGroup: $0) }
-                DispatchQueue.main.async {
-                    do {
-                        try RealmService.save(items: realmGroup)
-                        self?.reloadGroups()
-                    } catch {
-                        print(error)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.networking.fetchUserGroups { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let groupItems):
+                    let realmGroup = groupItems.map { RealmGroups(itemsGroup: $0) }
+                    DispatchQueue.main.async {
+                        do {
+                            try RealmService.save(items: realmGroup)
+                            self.reloadGroups()
+                        } catch {
+                            print(error)
+                        }
                     }
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
             }
         }
         
@@ -79,12 +80,13 @@ class UserGroupTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         groupsToken = realmGroups?.observe { [weak self] changes in
+            guard let self = self else { return }
             switch changes {
             case .initial(_):
-                self?.tableView.reloadData()
+                self.tableView.reloadData()
             case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                self.tableView.reloadData()
                 print(deletions, insertions, modifications)
-                self?.tableView.reloadData()
             case .error(let error):
                 print(error)
             }

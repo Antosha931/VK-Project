@@ -26,10 +26,11 @@ final class TextNewsTableViewCell: UITableViewCell {
         clearCell()
     }
     
-//    func configure(friend: Realm) {
-//    }
-    
-    func configure(news: News) {
-        newsTextLabel.text = news.textNews
+    func configure(textNews: RealmNews) {
+        newsTextLabel.text = textNews.text
     }
+    
+//    func configure(news: News) {
+//        newsTextLabel.text = news.textNews
+//    }
 }

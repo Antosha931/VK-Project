@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class FriendsTableViewController: UITableViewController {
+final class FriendsTableViewController: UITableViewController {
     
     @IBOutlet var friendsTableView: UITableView! {
         didSet {
@@ -56,36 +56,33 @@ class FriendsTableViewController: UITableViewController {
     private func reloadDataFriends() {
         realmFriend = try? RealmService.load(typeOf: RealmFriends.self)
         
-        friendsTableView.reloadData()
+        self.friendsTableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.clearsSelectionOnViewWillAppear = false
-                
-        friendsTableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserTableCell)
         
-        reloadDataFriends()
-        
-        networking.fetchUserFriends { [weak self] result in
-            switch result {
-            case .success(let friends):
-                let realmFriend = friends.map { RealmFriends(itemsFriend: $0) }
-                DispatchQueue.main.async {
-                    do {
-                        try RealmService.save(items: realmFriend)
-                        self?.reloadDataFriends()
-                    } catch {
-                        print(error)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.networking.fetchUserFriends { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let friends):
+                    let realmFriend = friends.map { RealmFriends(itemsFriend: $0) }
+                    DispatchQueue.main.async {
+                        do {
+                            try RealmService.save(items: realmFriend)
+                            self.reloadDataFriends()
+                        } catch {
+                            print(error)
+                        }
                     }
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
             }
         }
-        
-        self.clearsSelectionOnViewWillAppear = false
         
         friendsTableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserTableCell)
     }
@@ -113,26 +110,26 @@ class FriendsTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sortingFriendsNames().count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filterByAlphabet(lettersArray: sortingFriendsNames()[section]).count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUserTableCell, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUserTableCell, for: indexPath)
                 as? UniversalCell else { return UITableViewCell() }
         
         let arrayLetter = filterByAlphabet(lettersArray: sortingFriendsNames()[indexPath.section])
-
+        
         cell.configure(friend: arrayLetter[indexPath.row])
         
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return false
     }
@@ -140,10 +137,10 @@ class FriendsTableViewController: UITableViewController {
     // MARK: - Table view Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           guard let cell = tableView.cellForRow(at: indexPath) as? UniversalCell,
-                 let cellObject = cell.savedObject as? RealmFriends else { return }
-           performSegue(withIdentifier: segueIdentifierToFotoController, sender: cellObject)
-       }
+        guard let cell = tableView.cellForRow(at: indexPath) as? UniversalCell,
+              let cellObject = cell.savedObject as? RealmFriends else { return }
+        performSegue(withIdentifier: segueIdentifierToFotoController, sender: cellObject)
+    }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
@@ -156,9 +153,9 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
-
+    
     // MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifierToFotoController,
            let dst = segue.destination as? FriendsFotoCollectionViewController,
@@ -167,4 +164,4 @@ class FriendsTableViewController: UITableViewController {
         }
     }
 }
- 
+

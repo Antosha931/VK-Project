@@ -29,7 +29,7 @@ final class ImageNewsTableViewCell: UITableViewCell {
 //    func configure(friend: Realm) {
 //    }
     
-    func configure(image: News) {
-        newsImage.image = image.imageNews
-    }
+//    func configure(image: News) {
+//        newsImage.image = image.imageNews
+//    }
 }

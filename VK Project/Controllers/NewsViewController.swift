@@ -7,7 +7,14 @@
 
 import UIKit
 
-class NewsViewController: UIViewController {
+enum NewsScreen: Int {
+    case authorNews = 0
+    case textNews = 1
+    case imageNews = 2
+    case infoNews = 3
+}
+
+final class NewsViewController: UIViewController {
     
     @IBOutlet weak var newsTableView: UITableView! {
         didSet {
@@ -16,42 +23,40 @@ class NewsViewController: UIViewController {
         }
     }
     
-    private var newsArray = [News]()
-    
-    private func setupNews() -> [News] {
-        
-        var resultArray = [News]()
-        
-        let newsOne = News(authorName: "UEFA", authorAvatar: UIImage(named: "avatar")!, dateNews: Date(), textNews: "«ПСЖ» – «МЮ», «АТЛЕТИКО» – «БАВАРИЯ». ИТОГИ ЖЕРЕБЬЕВКИ 1/8 ЛИГИ ЧЕМПИОНОВ УЕФА, КОТОРУЮ ПЕРЕИГРАЮТ! Манипуляции с шариками провел Андрей Аршавин – посол финала турнира, который в этом сезоне пройдет в Санкт-Петербурге.", imageNews: UIImage(named: "news_1"), numbersViews: 112)
-        
-        resultArray.append(newsOne)
-        
-        let newsTwo = News(authorName: "UEFA", authorAvatar: UIImage(named: "avatar")!, dateNews: Date(), textNews: "Большой скандал на жеребьевки 1/8 Финала ЛЧ УЕФА 2020/2021 года. Что происходит в УЕФА? Во всём виновата Россия?", imageNews:  UIImage(named: "news_2"), numbersViews: 87)
-        
-        resultArray.append(newsTwo)
-        
-        let newsThree = News(authorName: "UEFA", authorAvatar: UIImage(named: "avatar")!, dateNews: Date(), textNews: "«Возможно, нам следует меньше зависеть от технологий» — президент УЕФА об ошибке при жеребьевке плей-офф Лиги чемпионов", imageNews: nil, numbersViews: 87)
-        
-        resultArray.append(newsThree)
-        
-        let newsFour = News(authorName: "UEFA", authorAvatar: UIImage(named: "avatar")!, dateNews: Date(), textNews: "В УЕФА принято решение о проведение повторной жеребьевки из-за технической ошибки! 🤷‍♂️", imageNews: UIImage(named: "news_3"), numbersViews: 44)
-        
-        resultArray.append(newsFour)
-        
-        return resultArray
-    }
+    private let networking = NetworkService()
+    private var newsArray = [RealmNews]()
+    private var newsAuthorFriendsArray = [RealmFriends]()
+    private var newsAuthorGroupsArray = [RealmGroups]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         newsTableView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.networking.fetchNews { [weak self] news, friend, group in
+                guard let self = self else { return }
+                let realmNews = news.map { RealmNews(itemsNews: $0) }
+                let realmFriends = friend.map { RealmFriends(itemsFriend: $0) }
+                let realmGroups = group.map { RealmGroups(itemsGroup: $0) }
+                DispatchQueue.main.async {
+                    self.newsArray = realmNews
+                    self.newsAuthorFriendsArray = realmFriends
+                    self.newsAuthorGroupsArray = realmGroups
+                    self.newsTableView.reloadData()
+                    print(self.newsArray.count, self.newsAuthorGroupsArray.count, self.newsAuthorFriendsArray.count)
+                }
+            }
+        }
+        
+//        networking.fetchNewsPhoto(idNews: 123) { photo in
+//            print(photo)
+//        }
+        
         newsTableView.register(UINib(nibName: "AuthorNewsTableViewCell", bundle: nil), forCellReuseIdentifier: "AuthorCell")
         newsTableView.register(UINib(nibName: "TextNewsTableViewCell", bundle: nil), forCellReuseIdentifier: "TextCell")
         newsTableView.register(UINib(nibName: "ImageNewsTableViewCell", bundle: nil), forCellReuseIdentifier: "ImageCell")
         newsTableView.register(UINib(nibName: "InfoPanelTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoCell")
-        
-        newsArray = setupNews()
     }
 }
 
@@ -67,32 +72,36 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.row {
-        case 0:
+        switch NewsScreen(rawValue: indexPath.row) {
+        case .authorNews:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthorCell", for: indexPath) as? AuthorNewsTableViewCell
             else { return UITableViewCell() }
             
-            cell.configure(author: newsArray[indexPath.section])
+            if newsArray[indexPath.section].author > 0 {
+                cell.configure(authorFriend: newsAuthorFriendsArray[indexPath.section], news: newsArray[indexPath.section])
+            } else if newsArray[indexPath.section].author < 0 {
+                cell.configure(authorGroup: newsAuthorGroupsArray[indexPath.section], news: newsArray[indexPath.section])
+            } else {
+                
+            }
             
             return cell
             
-        case 1:
+        case .textNews:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath) as? TextNewsTableViewCell
             else { return UITableViewCell() }
             
-            cell.configure(news: newsArray[indexPath.section])
+            cell.configure(textNews: newsArray[indexPath.section])
             
             return cell
             
-        case 2:
+        case .imageNews:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as? ImageNewsTableViewCell
             else { return UITableViewCell() }
             
-            cell.configure(image: newsArray[indexPath.section])
-            
             return cell
             
-        case 3:
+        case .infoNews:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell", for: indexPath) as? InfoPanelTableViewCell
             else { return UITableViewCell() }
             
@@ -113,6 +122,8 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.row {
         case 0:
             return 80
+        case 2:
+            return 0
         case 3:
             return 50
         default:

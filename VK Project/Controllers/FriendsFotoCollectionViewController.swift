@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class FriendsFotoCollectionViewController: UICollectionViewController {
+final class FriendsFotoCollectionViewController: UICollectionViewController {
     
     private let reuseIdentifier = "FotoCell"
     private let segueIdentifierToGalleryPhoto = "segueIdentifierToGalleryPhoto"
@@ -38,30 +38,33 @@ class FriendsFotoCollectionViewController: UICollectionViewController {
                 photoArray.append(photo)
             }
         }
+        
         self.collectionView.reloadData()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reloadPhoto()
-        
-        networking.fetchPhotos(friendId: String(friendId), completion: { [weak self] result in
-            switch result {
-            case .success(let itemsPhoto):
-                let realmPhoto = itemsPhoto.map {RealmPhoto.init(itemsPhoto: $0)}
-                DispatchQueue.main.async {
-                    do {
-                        try RealmService.save(items: realmPhoto)
-                        self?.reloadPhoto()
-                    } catch {
-                        print(error)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.networking.fetchPhotos(friendId: String(self.friendId), completion: { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let itemsPhoto):
+                    let realmPhoto = itemsPhoto.map {RealmPhoto.init(itemsPhoto: $0)}
+                    DispatchQueue.main.async {
+                        do {
+                            try RealmService.save(items: realmPhoto)
+                            self.reloadPhoto()
+                        } catch {
+                            print(error)
+                        }
                     }
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
-            }
-        })
+            })
+        }
         
         self.collectionView.register(UINib(nibName: "FotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
     }
@@ -70,15 +73,13 @@ class FriendsFotoCollectionViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         
         photoToken = realmPhoto?.observe { [weak self] changes in
+            guard let self = self else { return }
             switch changes {
             case .initial(_):
-                self?.collectionView.reloadData()
+                self.collectionView.reloadData()
             case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
-                self?.collectionView.isEditing = true
-                self?.collectionView.insertItems(at: deletions.map( {IndexPath(item: $0, section: 0)} ))
-                self?.collectionView.insertItems(at: insertions.map( {IndexPath(item: $0, section: 0)} ))
-                self?.collectionView.insertItems(at: modifications.map( {IndexPath(item: $0, section: 0)} ))
-                self?.collectionView.endEditing(true)
+                self.collectionView.reloadData()
+                print(deletions, insertions, modifications)
             case .error(let error):
                 print(error)
             }

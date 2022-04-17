@@ -149,7 +149,83 @@ class NetworkService {
         }
         task.resume()
 //            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-//
+//            
 //            print(json)
+    }
+    
+    func fetchNews(completion: @escaping ([ItemsNews], [ItemsFriend], [ItemsGroup]) -> Void) {
+        var constructor = urlConstructor
+        constructor.path = "/method/newsfeed.get"
+        constructor.queryItems = [
+            URLQueryItem(name: "user_id", value: Session.instance.userIdString),
+            URLQueryItem(name: "filters", value: "post"),
+            URLQueryItem(name: "return_banned", value: "0"),
+            URLQueryItem(name: "max_photos", value: "1"),
+            URLQueryItem(name: "source_ids", value: "groups"),
+            URLQueryItem(name: "count", value: "5"),
+            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "v", value: "5.131"),
+        ]
+
+        guard let url = constructor.url else { return }
+
+        let session = URLSession(configuration: .default)
+
+        let task = session.dataTask(with: url) { data, response, error in
+            guard error == nil,
+                  let data = data else { return }
+            
+            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            
+            print(json!)
+            
+            do {
+                let newsData = try JSONDecoder().decode(VKResponse<ResponseNews>.self, from: data)
+                
+                completion(newsData.response.items, newsData.response.friends, newsData.response.groups)
+                
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+        task.resume()
+    }
+    
+    func fetchNewsPhoto(idNews: Int, completion: @escaping ([ItemsPhotoArray]) -> Void) {
+        var constructor = urlConstructor
+        constructor.path = "/method/newsfeed.get"
+        constructor.queryItems = [
+            URLQueryItem(name: "user_id", value: Session.instance.userIdString),
+            URLQueryItem(name: "filters", value: "photo"),
+            URLQueryItem(name: "return_banned", value: "0"),
+            URLQueryItem(name: "max_photos", value: "1"),
+            URLQueryItem(name: "source_ids", value: "groups"),
+            URLQueryItem(name: "count", value: "5"),
+            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "v", value: "5.131"),
+        ]
+
+        guard let url = constructor.url else { return }
+
+        let session = URLSession(configuration: .default)
+
+        let task = session.dataTask(with: url) { data, response, error in
+            guard error == nil,
+                  let data = data else { return }
+            
+            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            
+            print(json!)
+            
+//            do {
+//                let newsData = try JSONDecoder().decode(VKResponse<ResponseNews>.self, from: data)
+//
+//                completion(newsData.response.items, newsData.response.friends, newsData.response.groups)
+//
+//            } catch let error {
+//                print(error.localizedDescription)
+//            }
+        }
+        task.resume()
     }
 }
