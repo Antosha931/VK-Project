@@ -13,6 +13,13 @@ final class UserGroupTableViewController: UITableViewController {
     private let reuseIdentifierUserGroupCell = "UserGroupCell"
     private let segueIdentifierToGlobalGroupController = "segueIdentifierToGlobalGroupController"
     
+    private let operationQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.name = "operationQueue"
+        operationQueue.qualityOfService = .userInteractive
+        return operationQueue
+    }()
+    
     private var groupSearchBar = UISearchBar()
     private let networking = NetworkService()
     private var realmGroups: Results<RealmGroups>?
@@ -20,7 +27,7 @@ final class UserGroupTableViewController: UITableViewController {
     private var groupsToken: NotificationToken?
     private var groupItems = [RealmGroups]() {
         didSet {
-            DispatchQueue.main.async {
+            OperationQueue.main.addOperation {
                 self.tableView.reloadData()
             }
         }
@@ -51,24 +58,19 @@ final class UserGroupTableViewController: UITableViewController {
         self.clearsSelectionOnViewWillAppear = false
         groupSearchBar.delegate = self
         
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.networking.fetchUserGroups { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let groupItems):
-                    let realmGroup = groupItems.map { RealmGroups(itemsGroup: $0) }
-                    DispatchQueue.main.async {
-                        do {
-                            try RealmService.save(items: realmGroup)
-                            self.reloadGroups()
-                        } catch {
-                            print(error)
-                        }
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-            }
+        let getData = GetDataOperation()
+        let parseData = ParseDataOperation()
+        let saveRealmData = SaveDataRealmOperation(controller: self)
+        
+        parseData.addDependency(getData)
+        saveRealmData.addDependency(parseData)
+        
+        operationQueue.addOperation(getData)
+        operationQueue.addOperation(parseData)
+        operationQueue.addOperation(saveRealmData)
+        
+        OperationQueue.main.addOperation {
+            self.reloadGroups()
         }
         
         self.tableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserGroupCell)
