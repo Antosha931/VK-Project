@@ -31,11 +31,11 @@ class FotoCollectionViewCell: UICollectionViewCell {
         clearCell()
     }
     
-    func configure(friendPhoto: RealmPhoto) {
-        savedObject = friendPhoto
-        numberLikes = friendPhoto.likesCount
-        statusLike = friendPhoto.likeStatus
-        photoImageView.image = friendPhoto.photo
+    func configure(friendPhotoItems: RealmPhoto, friendPhoto: UIImage?) {
+        savedObject = friendPhotoItems
+        numberLikes = friendPhotoItems.likesCount
+        statusLike = friendPhotoItems.likeStatus
+        photoImageView.image = friendPhoto
         setupLike()
     }
     

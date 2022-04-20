@@ -20,42 +20,38 @@ final class FriendsFotoCollectionViewController: UICollectionViewController {
     private var realmPhoto: Results<RealmPhoto>?
     private var photoFriend = [RealmPhoto]()
     private var photoToken: NotificationToken?
+    private var photoService: PhotoService?
     
     private var photoArray = [UIImage]()
     
-    private func reloadPhoto() {
-        
+    private func reloadPhotoData() {
         realmPhoto = try? RealmService.load(typeOf: RealmPhoto.self)
-        photoFriend.removeAll()
-        photoArray.removeAll()
         
         guard let items = realmPhoto else { return }
         
         for item in items {
-            guard let photo = item.photo else { return }
             if item.ownerId == friendId {
                 photoFriend.append(item)
-                photoArray.append(photo)
             }
         }
-        
         self.collectionView.reloadData()
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photoService = PhotoService(container: collectionView)
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.networking.fetchPhotos(friendId: String(self.friendId), completion: { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let itemsPhoto):
-                    let realmPhoto = itemsPhoto.map {RealmPhoto.init(itemsPhoto: $0)}
+                    let realmPhoto = itemsPhoto.map {RealmPhoto(itemsPhoto: $0)}
                     DispatchQueue.main.async {
                         do {
                             try RealmService.save(items: realmPhoto)
-                            self.reloadPhoto()
+                            self.reloadPhotoData()
                         } catch {
                             print(error)
                         }
@@ -94,10 +90,6 @@ final class FriendsFotoCollectionViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDataSource
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoFriend.count
     }
@@ -106,7 +98,11 @@ final class FriendsFotoCollectionViewController: UICollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
                 as? FotoCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.configure(friendPhoto: photoFriend[indexPath.item])
+        if let photo = photoService?.photoLoad(url: photoFriend[indexPath.item].photoUrlString, indexPath: indexPath) {
+            photoArray.append(photo)
+        }
+        
+        cell.configure(friendPhotoItems: photoFriend[indexPath.item], friendPhoto: photoArray[indexPath.item])
         
         return cell
     }

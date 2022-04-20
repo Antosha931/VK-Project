@@ -52,36 +52,36 @@ class NetworkService {
     }
     
     
-    func fetchUserGroups(completion: @escaping (Result<[ItemsGroup], Error>) -> Void ) {
-        var constructor = urlConstructor
-        constructor.path = "/method/groups.get"
-        constructor.queryItems = [
-            URLQueryItem(name: "user_id", value: Session.instance.userIdString),
-            URLQueryItem(name: "count", value: "20"),
-            URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "access_token", value: Session.instance.token),
-            URLQueryItem(name: "v", value: "5.131"),
-        ]
-        
-        guard let url = constructor.url else { return }
-        
-        let session = URLSession(configuration: .default)
-        
-        let task = session.dataTask(with: url) { data, response, error in
-            guard error == nil,
-                  let data = data else { return }
-            
-            do {
-                let friendsData = try JSONDecoder().decode(VKResponse<ResponseGroups>.self, from: data)
-                
-                completion(.success(friendsData.response.items))
-                
-            } catch let error as NSError {
-                completion(.failure(error))
-            }
-        }
-        task.resume()
-    }
+//    func fetchUserGroups(completion: @escaping (Result<[ItemsGroup], Error>) -> Void ) {
+//        var constructor = urlConstructor
+//        constructor.path = "/method/groups.get"
+//        constructor.queryItems = [
+//            URLQueryItem(name: "user_id", value: Session.instance.userIdString),
+//            URLQueryItem(name: "count", value: "20"),
+//            URLQueryItem(name: "extended", value: "1"),
+//            URLQueryItem(name: "access_token", value: Session.instance.token),
+//            URLQueryItem(name: "v", value: "5.131"),
+//        ]
+//
+//        guard let url = constructor.url else { return }
+//
+//        let session = URLSession(configuration: .default)
+//
+//        let task = session.dataTask(with: url) { data, response, error in
+//            guard error == nil,
+//                  let data = data else { return }
+//
+//            do {
+//                let friendsData = try JSONDecoder().decode(VKResponse<ResponseGroups>.self, from: data)
+//
+//                completion(.success(friendsData.response.items))
+//
+//            } catch let error as NSError {
+//                completion(.failure(error))
+//            }
+//        }
+//        task.resume()
+//    }
     
     
     func fetchGlobalGroup(groupSearch: String, completion: @escaping (Result<[ItemsGroup], Error>) -> Void ) {
@@ -190,6 +190,7 @@ class NetworkService {
         }
         task.resume()
     }
+    
     
     func fetchNewsPhoto(idNews: Int, completion: @escaping ([ItemsPhotoArray]) -> Void) {
         var constructor = urlConstructor
