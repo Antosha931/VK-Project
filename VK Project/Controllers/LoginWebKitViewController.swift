@@ -7,8 +7,9 @@
 
 import UIKit
 import WebKit
+import RealmSwift
 
-class LoginWebKitViewController: UIViewController {
+final class LoginWebKitViewController: UIViewController {
     
     @IBOutlet weak var loginWebView: WKWebView! {
         didSet {
@@ -17,6 +18,7 @@ class LoginWebKitViewController: UIViewController {
     }
     
     let segueIdentifier = "IdentifierToTabBarController"
+    let realm = try? Realm()
     
     @IBAction func unwindToVKLogin(_ segue: UIStoryboardSegue) {
         Session.instance.token = ""
@@ -45,7 +47,7 @@ class LoginWebKitViewController: UIViewController {
         comp.host = "oauth.vk.com"
         comp.path = "/authorize"
         comp.queryItems = [
-            URLQueryItem(name: "client_id", value: "8081873"),
+            URLQueryItem(name: "client_id", value: "8136304"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "scope", value: "336918"),
@@ -57,6 +59,10 @@ class LoginWebKitViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.realm?.beginWrite()
+//        self.realm?.deleteAll()
+//        try? self.realm?.commitWrite()
         
         guard let url = urlComponents.url else { return }
         

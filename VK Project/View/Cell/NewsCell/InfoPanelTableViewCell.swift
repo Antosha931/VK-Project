@@ -27,9 +27,14 @@ final class InfoPanelTableViewCell: UITableViewCell {
         setupUI()
     }
     
-    func configure(news: News) {
-        numbersViewsLabel.text = "👁‍🗨 \(news.numbersViews)"
+    func configure(news: RealmNews) {
+        numbersViewsLabel.text = "👁‍🗨 \(news.viewsCount)"
+        statusLikeButton = news.likeStatus
     }
+    
+//    func configure(news: News) {
+//        numbersViewsLabel.text = "👁‍🗨 \(news.numbersViews)"
+//    }
     
     @IBAction func likeButton(_ sender: Any) {
         if statusLikeButton == false {

@@ -7,15 +7,15 @@
 
 import UIKit
 
-class GlobalGroupTableViewController: UITableViewController {
-    
-    private let globalGroupSearchBar = UISearchBar()
+final class GlobalGroupTableViewController: UITableViewController {
     
     private let reuseIdentifierGlobalGroupCell = "GlobalGroupCell"
     
     var globalGroup = [ItemsGroup]()
     
+    private let globalGroupSearchBar = UISearchBar()
     private let networking = NetworkService()
+    private var searchString = String()
     private var resultSearchGrlobalGroup = [ItemsGroup]() {
         didSet {
             DispatchQueue.main.async {
@@ -23,8 +23,6 @@ class GlobalGroupTableViewController: UITableViewController {
             }
         }
     }
-    
-    private var searchString = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,9 +45,7 @@ class GlobalGroupTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierGlobalGroupCell, for: indexPath)
                 as? UniversalCell else { return UITableViewCell() }
         
-//        if let itemsGroup = Groups(itemsGroup: resultSearchGrlobalGroup[indexPath.row]) {
             cell.configure(group: Groups(itemsGroup: resultSearchGrlobalGroup[indexPath.row]))
-//        }
         
         return cell
     }
@@ -86,9 +82,10 @@ extension GlobalGroupTableViewController: UISearchBarDelegate {
             searchString = searchText
             
             networking.fetchGlobalGroup(groupSearch: searchString, completion: { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success(let globalGroupItems):
-                    self?.resultSearchGrlobalGroup = globalGroupItems
+                    self.resultSearchGrlobalGroup = globalGroupItems
                 case .failure(let error):
                     print(error)
                 }

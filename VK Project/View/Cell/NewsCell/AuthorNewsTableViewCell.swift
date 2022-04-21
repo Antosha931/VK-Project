@@ -20,7 +20,7 @@ final class AuthorNewsTableViewCell: UITableViewCell {
     
     private func newsDateFormatter(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
         return dateFormatter.string(from: date)
     }
     
@@ -41,12 +41,21 @@ final class AuthorNewsTableViewCell: UITableViewCell {
         clearCell()
     }
     
-//    func configure(friend: Realm) {
-//    }
-    
-    func configure(author: News) {
-        avatarAuthorNewsImage.image = author.authorAvatar
-        nameAuthorNewsLabel.text = author.authorName
-        dateNewsLabel.text = newsDateFormatter(date: author.dateNews)
+    func configure(authorFriend: RealmFriends, news: RealmNews) {
+            avatarAuthorNewsImage.image = authorFriend.avatar
+            nameAuthorNewsLabel.text = authorFriend.fullName
+            dateNewsLabel.text = newsDateFormatter(date: Date(timeIntervalSince1970: TimeInterval(news.date)))
     }
+    
+    func configure(authorGroup: RealmGroups, news: RealmNews) {
+            avatarAuthorNewsImage.image = authorGroup.avatar
+            nameAuthorNewsLabel.text = authorGroup.name
+            dateNewsLabel.text = newsDateFormatter(date: Date(timeIntervalSince1970: TimeInterval(news.date)))
+    }
+    
+//    func configure(author: News) {
+//        avatarAuthorNewsImage.image = author.authorAvatar
+//        nameAuthorNewsLabel.text = author.authorName
+//        dateNewsLabel.text = newsDateFormatter(date: author.dateNews)
+//    }
 }
