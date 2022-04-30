@@ -17,7 +17,6 @@ final class FriendsTableViewController: UITableViewController {
         }
     }
     
-    private let reuseIdentifierUserTableCell = "UserCell"
     private let segueIdentifierToFotoController = "segueIdentifierToFotoController"
     
     var savedObject: Any?
@@ -84,7 +83,8 @@ final class FriendsTableViewController: UITableViewController {
             }
         }
         
-        friendsTableView.register(UINib(nibName: "UniversalCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUserTableCell)
+        friendsTableView.registerNIB(registerClass: UniversalCell.self)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,8 +120,7 @@ final class FriendsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUserTableCell, for: indexPath)
-                as? UniversalCell else { return UITableViewCell() }
+        let cell = friendsTableView.dequeueReusableCell(forIndexPath: indexPath) as! UniversalCell
         
         let arrayLetter = filterByAlphabet(lettersArray: sortingFriendsNames()[indexPath.section])
         

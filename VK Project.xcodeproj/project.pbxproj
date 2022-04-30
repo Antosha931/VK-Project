@@ -47,6 +47,7 @@
 		2AA3800127FA440700675242 /* TextNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AA37FFF27FA440700675242 /* TextNewsTableViewCell.xib */; };
 		2AB7D0C727CD4DD700167643 /* RealmFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7D0C627CD4DD700167643 /* RealmFriends.swift */; };
 		2AC8175B280F0BBD00DE7798 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC8175A280F0BBC00DE7798 /* PhotoService.swift */; };
+		2AC8176128120E0900DE7798 /* ProtocolReusableView + extensionUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC8176028120E0900DE7798 /* ProtocolReusableView + extensionUITableView.swift */; };
 		2ACFF0DC27C6ED570051821F /* VKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACFF0DB27C6ED570051821F /* VKResponse.swift */; };
 		2ADB8C1D27FCB16400D778B2 /* DataNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADB8C1C27FCB16400D778B2 /* DataNews.swift */; };
 		2ADB8C2027FCD49300D778B2 /* RealmNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADB8C1F27FCD49300D778B2 /* RealmNews.swift */; };
@@ -100,6 +101,7 @@
 		2AA37FFF27FA440700675242 /* TextNewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextNewsTableViewCell.xib; sourceTree = "<group>"; };
 		2AB7D0C627CD4DD700167643 /* RealmFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmFriends.swift; sourceTree = "<group>"; };
 		2AC8175A280F0BBC00DE7798 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		2AC8176028120E0900DE7798 /* ProtocolReusableView + extensionUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProtocolReusableView + extensionUITableView.swift"; sourceTree = "<group>"; };
 		2ACFF0DB27C6ED570051821F /* VKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKResponse.swift; sourceTree = "<group>"; };
 		2ADB8C1C27FCB16400D778B2 /* DataNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataNews.swift; sourceTree = "<group>"; };
 		2ADB8C1F27FCD49300D778B2 /* RealmNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmNews.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 		2A431E9E2783A356004688BC /* VK Project */ = {
 			isa = PBXGroup;
 			children = (
+				2AC8175E28120DA800DE7798 /* Protocols */,
 				2ABC92BC27C562F200935201 /* Networking */,
 				2A6CFCAF279620B4006CD528 /* Model */,
 				2A67C6A227B05C440069D821 /* View */,
@@ -286,6 +289,14 @@
 				2A026E8D27C17977001FB674 /* NetworkDataStruct */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		2AC8175E28120DA800DE7798 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				2AC8176028120E0900DE7798 /* ProtocolReusableView + extensionUITableView.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		2ACBFE4327B07A7B008D068B /* SupportingFiles */ = {
@@ -469,6 +480,7 @@
 				2A5DF986280D8DB00035A3F2 /* GetDataOperation.swift in Sources */,
 				2A431EC4278755C5004688BC /* UserGroupTableViewController.swift in Sources */,
 				2A67C68C27A81C000069D821 /* NewsViewController.swift in Sources */,
+				2AC8176128120E0900DE7798 /* ProtocolReusableView + extensionUITableView.swift in Sources */,
 				2A7F7DDC27FA552500C5BADA /* InfoPanelTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
